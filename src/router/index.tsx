@@ -7,11 +7,11 @@ import React from "react";
 import HomePage from "@/page/home-page";
 import ListProductPage from "@/page/products-page";
 import CartPage from "@/page/cart-page";
+import CheckoutPage from "@/page/payment-page";
+import ProductDetailPage from "@/page/product-detail";
 
 // TODO: thay bằng page thật của bạn
-const CheckoutPage = () => <div>Thanh toán</div>;
 const ProfilePage = () => <div>Thông tin cá nhân</div>;
-const OrdersPage = () => <div>Đơn hàng của tôi</div>;
 
 const ProtectedRoute = ({
   element,
@@ -86,11 +86,11 @@ export const router = createBrowserRouter(
           errorElement: <ErrorPage isLogout={false} />,
         },
         {
-          path: "orders",
+          path: "/product/:id",
           element: (
             <ProtectedRoute
-              element={<OrdersPage />}
-              titleId="Đơn hàng của tôi"
+              element={<ProductDetailPage />}
+              titleId="Chi tiết sản phẩm"
             />
           ),
           errorElement: <ErrorPage isLogout={false} />,

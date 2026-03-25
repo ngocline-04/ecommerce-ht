@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { DialogView } from "./components/dialog";
 import { ToastView } from "./components/toast";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 

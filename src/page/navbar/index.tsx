@@ -6,9 +6,7 @@ import {
   Menu,
   Button,
   Badge,
-  Input,
   Avatar,
-  Empty,
 } from "antd";
 import ReactSvg from "@/assets/logo/logo-ht.png";
 import { useEffect, useMemo, useState } from "react";
@@ -16,18 +14,17 @@ import {
   BellOutlined,
   HomeOutlined,
   LoginOutlined,
-  MessageOutlined,
   PoweroffOutlined,
-  SendOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/App";
 import { CartBadge } from "@/baseComponent/cartBadge";
+import ChatWidget from "@/components/chat";
+import type { UserRecord } from "@/components/chat/chat.type";
 
 const { Sider, Content, Header } = Layout;
-const { TextArea } = Input;
 
 type CategoryOption = {
   id: string;
@@ -49,14 +46,6 @@ type MenuCategoryItem = {
   children?: MenuCategoryItem[];
 };
 
-type UserRecord = {
-  id: string;
-  name?: string;
-  email?: string;
-  phoneNumber?: string;
-  isStaff?: boolean;
-};
-
 function LayoutSaving() {
   const tokenAntd = antTheme.useToken();
   const location = useLocation();
@@ -67,19 +56,6 @@ function LayoutSaving() {
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [currentUserProfile, setCurrentUserProfile] =
     useState<UserRecord | null>(null);
-
-  const [chatOpen, setChatOpen] = useState(false);
-  const [chatInput, setChatInput] = useState("");
-  const [chatMessages, setChatMessages] = useState<
-    Array<{ id: string; sender: "user" | "system"; text: string }>
-  >([
-    {
-      id: "welcome",
-      sender: "system",
-      text: "Xin chào 👋 Bạn cần hỗ trợ gì hôm nay?",
-    },
-  ]);
-
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 
   const selectedMenuKey = useMemo(() => {
@@ -292,26 +268,6 @@ function LayoutSaving() {
     }
   };
 
-  const handleSendChat = () => {
-    const trimmed = chatInput.trim();
-    if (!trimmed) return;
-
-    const nextUserMessage = {
-      id: `${Date.now()}-user`,
-      sender: "user" as const,
-      text: trimmed,
-    };
-
-    const nextSystemMessage = {
-      id: `${Date.now()}-system`,
-      sender: "system" as const,
-      text: "Cảm ơn bạn đã liên hệ. Bộ phận tư vấn sẽ phản hồi sớm nhất.",
-    };
-
-    setChatMessages((prev) => [...prev, nextUserMessage, nextSystemMessage]);
-    setChatInput("");
-  };
-
   const displayName =
     currentUserProfile?.name ||
     currentUser?.displayName ||
@@ -429,6 +385,7 @@ function LayoutSaving() {
             >
               <Outlet />
             </Content>
+
             <footer className="bg-[#0f2747] px-24 py-40 text-common-1000 mobile:px-16">
               <div className="mx-auto max-w-[1366px]">
                 <div className="text-20 font-bold leading-28">
@@ -456,108 +413,10 @@ function LayoutSaving() {
         </Layout>
       </Layout>
 
-      <Button
-        type="primary"
-        shape="circle"
-        size="large"
-        icon={<MessageOutlined />}
-        onClick={() => setChatOpen((prev) => !prev)}
-        style={{
-          position: "fixed",
-          right: 24,
-          bottom: 24,
-          zIndex: 1000,
-          width: 56,
-          height: 56,
-          boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
-        }}
+      <ChatWidget
+        currentUser={currentUser}
+        currentUserProfile={currentUserProfile}
       />
-
-      {chatOpen ? (
-        <div
-          style={{
-            position: "fixed",
-            right: 24,
-            bottom: 92,
-            width: 360,
-            height: 480,
-            background: "#fff",
-            borderRadius: 16,
-            boxShadow: "0 12px 32px rgba(0,0,0,0.18)",
-            zIndex: 1000,
-            display: "flex",
-            flexDirection: "column",
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              padding: 16,
-              background: tokenAntd.token.colorPrimary,
-              color: "#fff",
-              fontWeight: 600,
-            }}
-          >
-            Hỗ trợ trực tuyến
-          </div>
-
-          <div
-            style={{
-              flex: 1,
-              padding: 16,
-              overflowY: "auto",
-              background: "#fafafa",
-            }}
-          >
-            {chatMessages.length ? (
-              <div className="flex flex-col gap-12">
-                {chatMessages.map((item) => (
-                  <div
-                    key={item.id}
-                    className={`max-w-[85%] rounded-radius-l px-12 py-8 text-14 ${
-                      item.sender === "user"
-                        ? "ml-auto bg-primary-500 text-common-1000"
-                        : "bg-color-100 text-color-900"
-                    }`}
-                  >
-                    {item.text}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <Empty description="Chưa có tin nhắn" />
-            )}
-          </div>
-
-          <div
-            style={{
-              padding: 12,
-              borderTop: `1px solid ${tokenAntd.token.colorBorderSecondary}`,
-              background: "#fff",
-            }}
-          >
-            <div className="flex items-end gap-8">
-              <TextArea
-                value={chatInput}
-                onChange={(e) => setChatInput(e.target.value)}
-                placeholder="Nhập nội dung cần hỗ trợ..."
-                autoSize={{ minRows: 2, maxRows: 4 }}
-                onPressEnter={(e) => {
-                  if (!e.shiftKey) {
-                    e.preventDefault();
-                    handleSendChat();
-                  }
-                }}
-              />
-              <Button
-                type="primary"
-                icon={<SendOutlined />}
-                onClick={handleSendChat}
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
     </>
   );
 }

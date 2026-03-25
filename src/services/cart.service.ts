@@ -9,6 +9,7 @@ import {
   query,
   updateDoc,
   where,
+  writeBatch,
 } from "firebase/firestore";
 import { db } from "@/App";
 
@@ -141,4 +142,21 @@ export const toggleCartPendingChecked = async (cartId: string, checked: boolean)
     checked,
     updatedAt: dayjs().toISOString(),
   });
+};
+
+export const clearCartAfterCheckout = async (userId: string) => {
+  const q = query(
+    collection(db, "CartPending"),
+    where("idUser", "==", userId),
+  );
+
+  const snapshot = await getDocs(q);
+
+  const batch = writeBatch(db);
+
+  snapshot.docs.forEach((docItem) => {
+    batch.delete(docItem.ref);
+  });
+
+  await batch.commit();
 };

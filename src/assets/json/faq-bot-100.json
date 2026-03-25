@@ -1,0 +1,1905 @@
+[
+  {
+    "key": "faq_001",
+    "question": "bồn tắm massage giá bao nhiêu",
+    "keywords": [
+      "bồn tắm massage",
+      "giá",
+      "bao nhiêu",
+      "massage",
+      "bồn tắm"
+    ],
+    "answer": "Dạ bồn tắm massage bên em có nhiều mức giá khác nhau tùy kích thước, chất liệu và tính năng. Anh/chị cho em xin khoảng ngân sách hoặc kích thước mong muốn để em tư vấn nhanh hơn nhé.",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "faq_002",
+    "question": "bồn tắm thường giá bao nhiêu",
+    "keywords": [
+      "bồn tắm thường",
+      "giá",
+      "bao nhiêu",
+      "bồn tắm"
+    ],
+    "answer": "Dạ bồn tắm thường có nhiều phân khúc giá tùy kiểu dáng và chất liệu. Anh/chị cho em xin kích thước hoặc ngân sách dự kiến để em gợi ý phù hợp nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_003",
+    "question": "bồn tắm massage có những loại nào",
+    "keywords": [
+      "bồn tắm massage",
+      "loại nào",
+      "mẫu nào"
+    ],
+    "answer": "Dạ bồn tắm massage hiện có nhiều loại như bồn độc lập, bồn góc, bồn xây và các mẫu 1 người hoặc 2 người dùng. Anh/chị đang quan tâm kiểu nào để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_004",
+    "question": "bồn tắm góc có không",
+    "keywords": [
+      "bồn tắm góc",
+      "có không",
+      "mẫu góc"
+    ],
+    "answer": "Dạ bên em có bồn tắm góc cho nhiều diện tích phòng tắm khác nhau. Anh/chị cho em xin kích thước khu vực lắp đặt để em gợi ý mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_005",
+    "question": "bồn tắm nằm độc lập có không",
+    "keywords": [
+      "bồn tắm độc lập",
+      "bồn nằm độc lập",
+      "freestanding"
+    ],
+    "answer": "Dạ bên em có các mẫu bồn tắm nằm độc lập với nhiều kiểu dáng hiện đại. Anh/chị thích phong cách oval, chữ nhật hay tân cổ điển để em tư vấn nhanh nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_006",
+    "question": "bồn tắm cho phòng nhỏ",
+    "keywords": [
+      "bồn tắm nhỏ",
+      "phòng nhỏ",
+      "nhỏ gọn"
+    ],
+    "answer": "Nếu phòng tắm nhỏ, mình nên ưu tiên các mẫu bồn tắm kích thước gọn hoặc thiết kế góc. Anh/chị gửi giúp em kích thước khu vực lắp để em chọn mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_007",
+    "question": "bồn tắm 2 người giá thế nào",
+    "keywords": [
+      "bồn tắm 2 người",
+      "hai người",
+      "giá"
+    ],
+    "answer": "Dạ bồn tắm 2 người thường có giá cao hơn do kích thước lớn và cấu hình nhiều hơn. Anh/chị cho em xin khoảng ngân sách để em gợi ý nhanh một vài mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_008",
+    "question": "bồn tắm có sẵn hàng không",
+    "keywords": [
+      "sẵn hàng",
+      "có hàng không",
+      "tồn kho",
+      "bồn tắm"
+    ],
+    "answer": "Tình trạng hàng sẵn kho sẽ tùy từng mẫu cụ thể. Anh/chị gửi em mã hoặc hình mẫu đang quan tâm để em kiểm tra tồn kho nhanh nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_009",
+    "question": "chất liệu bồn tắm là gì",
+    "keywords": [
+      "chất liệu bồn tắm",
+      "acrylic",
+      "composite",
+      "chất liệu"
+    ],
+    "answer": "Dạ bồn tắm có thể dùng nhiều chất liệu như acrylic, composite hoặc vật liệu cao cấp khác tùy dòng sản phẩm. Anh/chị đang xem mẫu nào để em báo đúng thông số nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_010",
+    "question": "bồn tắm massage có tốn điện không",
+    "keywords": [
+      "tốn điện",
+      "bồn tắm massage",
+      "điện năng"
+    ],
+    "answer": "Bồn tắm massage có sử dụng điện cho bơm và các tính năng đi kèm nên mức tiêu thụ sẽ tùy cấu hình sử dụng. Nếu anh/chị cần, em có thể tư vấn dòng tối ưu chi phí vận hành hơn nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_011",
+    "question": "sen tắm cây có những loại nào",
+    "keywords": [
+      "sen tắm cây",
+      "loại nào",
+      "sen cây"
+    ],
+    "answer": "Dạ sen tắm cây có nhiều loại như nóng lạnh, nhiệt độ ổn định, âm tường hoặc kiểu hiện đại. Anh/chị thích phong cách nào để em gợi ý nhanh nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_012",
+    "question": "sen cây giá bao nhiêu",
+    "keywords": [
+      "sen cây",
+      "giá",
+      "bao nhiêu"
+    ],
+    "answer": "Dạ sen cây có nhiều phân khúc giá tùy chất liệu và thương hiệu. Anh/chị cho em xin khoảng ngân sách để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_013",
+    "question": "vòi lavabo nóng lạnh giá bao nhiêu",
+    "keywords": [
+      "vòi lavabo",
+      "nóng lạnh",
+      "giá"
+    ],
+    "answer": "Dạ vòi lavabo nóng lạnh có nhiều phân khúc giá theo chất liệu và kiểu dáng. Anh/chị đang cần lắp cho lavabo đặt bàn hay âm bàn để em tư vấn đúng hơn nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_014",
+    "question": "lavabo đặt bàn có mẫu nào đẹp",
+    "keywords": [
+      "lavabo đặt bàn",
+      "mẫu đẹp",
+      "đặt bàn"
+    ],
+    "answer": "Dạ lavabo đặt bàn có rất nhiều mẫu hiện đại, tối giản và tân cổ điển. Anh/chị thích dáng tròn, vuông hay oval để em gợi ý nhanh nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_015",
+    "question": "lavabo treo tường giá bao nhiêu",
+    "keywords": [
+      "lavabo treo tường",
+      "giá",
+      "bao nhiêu"
+    ],
+    "answer": "Dạ lavabo treo tường có nhiều mẫu nhỏ gọn phù hợp nhà vệ sinh diện tích vừa và nhỏ. Anh/chị cho em xin kích thước mong muốn để em chọn mẫu đẹp nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_016",
+    "question": "bồn cầu một khối hay hai khối tốt hơn",
+    "keywords": [
+      "bồn cầu một khối",
+      "hai khối",
+      "tốt hơn"
+    ],
+    "answer": "Dạ bồn cầu một khối thường đẹp và dễ vệ sinh hơn, còn hai khối có nhiều lựa chọn giá mềm hơn. Anh/chị ưu tiên thẩm mỹ hay tối ưu chi phí để em tư vấn phù hợp nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_017",
+    "question": "bồn cầu thông minh có đáng mua không",
+    "keywords": [
+      "bồn cầu thông minh",
+      "đáng mua",
+      "nên mua"
+    ],
+    "answer": "Nếu anh/chị muốn tăng tiện nghi và trải nghiệm sử dụng thì bồn cầu thông minh là lựa chọn rất đáng cân nhắc. Em có thể gợi ý theo ngân sách và nhu cầu thực tế của mình nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_018",
+    "question": "gương phòng tắm có đèn led không",
+    "keywords": [
+      "gương đèn led",
+      "gương phòng tắm",
+      "led"
+    ],
+    "answer": "Dạ bên em có gương phòng tắm tích hợp đèn led với nhiều kích thước và kiểu dáng. Anh/chị muốn gương tròn, chữ nhật hay cảm ứng để em tư vấn nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_019",
+    "question": "tủ lavabo có sẵn bộ không",
+    "keywords": [
+      "tủ lavabo",
+      "trọn bộ",
+      "có sẵn bộ"
+    ],
+    "answer": "Dạ bên em có các bộ tủ lavabo đi kèm chậu và gương tùy mẫu. Anh/chị cho em xin kích thước dự kiến để em gợi ý combo phù hợp nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_020",
+    "question": "phụ kiện nhà tắm có bán lẻ không",
+    "keywords": [
+      "phụ kiện nhà tắm",
+      "bán lẻ",
+      "móc treo",
+      "giấy"
+    ],
+    "answer": "Dạ bên em có bán lẻ nhiều loại phụ kiện nhà tắm như kệ, móc treo, lô giấy, vắt khăn. Anh/chị đang cần món nào để em gửi mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_021",
+    "question": "chính sách bảo hành như thế nào",
+    "keywords": [
+      "bảo hành",
+      "chính sách bảo hành",
+      "bao hanh"
+    ],
+    "answer": "Dạ mỗi dòng sản phẩm sẽ có thời gian và điều kiện bảo hành khác nhau theo hãng. Anh/chị gửi em mã hoặc tên sản phẩm để em kiểm tra chính xác nhất nhé.",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "faq_022",
+    "question": "có hỗ trợ lắp đặt không",
+    "keywords": [
+      "lắp đặt",
+      "thi công",
+      "hỗ trợ lắp"
+    ],
+    "answer": "Dạ bên em có hỗ trợ tư vấn lắp đặt tùy theo khu vực và loại sản phẩm. Anh/chị cho em xin địa điểm thi công để em kiểm tra hỗ trợ cụ thể nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_023",
+    "question": "bao lâu giao hàng",
+    "keywords": [
+      "giao hàng",
+      "bao lâu",
+      "vận chuyển",
+      "mấy ngày"
+    ],
+    "answer": "Dạ thời gian giao hàng sẽ phụ thuộc khu vực nhận hàng và tình trạng sẵn kho của sản phẩm. Anh/chị cho em xin tỉnh/thành để em báo nhanh thời gian dự kiến nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_024",
+    "question": "có ship tỉnh không",
+    "keywords": [
+      "ship tỉnh",
+      "giao tỉnh",
+      "vận chuyển tỉnh"
+    ],
+    "answer": "Dạ bên em có hỗ trợ giao hàng tỉnh. Anh/chị cho em xin khu vực nhận hàng và sản phẩm quan tâm để em báo phương án vận chuyển phù hợp nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_025",
+    "question": "có xuất hóa đơn vat không",
+    "keywords": [
+      "hóa đơn vat",
+      "xuất hóa đơn",
+      "vat"
+    ],
+    "answer": "Dạ bên em có hỗ trợ xuất hóa đơn theo nhu cầu. Anh/chị cần xuất cho cá nhân hay công ty để em hướng dẫn thông tin phù hợp nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_026",
+    "question": "máy sục giá bao nhiêu",
+    "keywords": [
+      "bao",
+      "máy",
+      "giá",
+      "nhiêu",
+      "sục"
+    ],
+    "answer": "Dạ các mẫu máy sục sẽ tùy theo dòng bồn và cấu hình sử dụng. Anh/chị cho em xin mã sản phẩm hoặc nhu cầu cụ thể để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_027",
+    "question": "có máy sục không",
+    "keywords": [
+      "sục",
+      "máy",
+      "có",
+      "không"
+    ],
+    "answer": "Dạ các mẫu máy sục sẽ tùy theo dòng bồn và cấu hình sử dụng. Anh/chị cho em xin mã sản phẩm hoặc nhu cầu cụ thể để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_028",
+    "question": "máy sục loại nào tốt",
+    "keywords": [
+      "máy",
+      "tốt",
+      "loại",
+      "nào",
+      "sục"
+    ],
+    "answer": "Dạ các mẫu máy sục sẽ tùy theo dòng bồn và cấu hình sử dụng. Anh/chị cho em xin mã sản phẩm hoặc nhu cầu cụ thể để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_029",
+    "question": "nên mua máy sục hãng nào",
+    "keywords": [
+      "nên",
+      "hãng",
+      "máy",
+      "mua",
+      "nào",
+      "sục"
+    ],
+    "answer": "Dạ các mẫu máy sục sẽ tùy theo dòng bồn và cấu hình sử dụng. Anh/chị cho em xin mã sản phẩm hoặc nhu cầu cụ thể để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_030",
+    "question": "máy sục có sẵn không",
+    "keywords": [
+      "máy",
+      "có",
+      "sục",
+      "sẵn",
+      "không"
+    ],
+    "answer": "Dạ các mẫu máy sục sẽ tùy theo dòng bồn và cấu hình sử dụng. Anh/chị cho em xin mã sản phẩm hoặc nhu cầu cụ thể để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_031",
+    "question": "tư vấn máy sục",
+    "keywords": [
+      "vấn",
+      "tư",
+      "sục",
+      "máy"
+    ],
+    "answer": "Dạ các mẫu máy sục sẽ tùy theo dòng bồn và cấu hình sử dụng. Anh/chị cho em xin mã sản phẩm hoặc nhu cầu cụ thể để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_032",
+    "question": "máy sục bảo hành thế nào",
+    "keywords": [
+      "thế",
+      "bảo",
+      "hành",
+      "máy",
+      "nào",
+      "sục"
+    ],
+    "answer": "Dạ các mẫu máy sục sẽ tùy theo dòng bồn và cấu hình sử dụng. Anh/chị cho em xin mã sản phẩm hoặc nhu cầu cụ thể để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_033",
+    "question": "máy sục lắp đặt ra sao",
+    "keywords": [
+      "lắp",
+      "ra",
+      "sao",
+      "máy",
+      "đặt",
+      "sục"
+    ],
+    "answer": "Dạ các mẫu máy sục sẽ tùy theo dòng bồn và cấu hình sử dụng. Anh/chị cho em xin mã sản phẩm hoặc nhu cầu cụ thể để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_034",
+    "question": "máy sục phù hợp nhà nhỏ không",
+    "keywords": [
+      "nhà",
+      "máy",
+      "sục",
+      "phù",
+      "không",
+      "hợp",
+      "nhỏ"
+    ],
+    "answer": "Dạ các mẫu máy sục sẽ tùy theo dòng bồn và cấu hình sử dụng. Anh/chị cho em xin mã sản phẩm hoặc nhu cầu cụ thể để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_035",
+    "question": "máy sục mẫu đẹp",
+    "keywords": [
+      "sục",
+      "mẫu",
+      "máy",
+      "đẹp"
+    ],
+    "answer": "Dạ các mẫu máy sục sẽ tùy theo dòng bồn và cấu hình sử dụng. Anh/chị cho em xin mã sản phẩm hoặc nhu cầu cụ thể để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_036",
+    "question": "sen âm tường giá bao nhiêu",
+    "keywords": [
+      "âm",
+      "bao",
+      "giá",
+      "sen",
+      "nhiêu",
+      "tường"
+    ],
+    "answer": "Dạ sen âm tường có nhiều mẫu hiện đại, đẹp và gọn không gian. Anh/chị thích phong cách tối giản hay sang trọng để em gửi mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_037",
+    "question": "có sen âm tường không",
+    "keywords": [
+      "âm",
+      "có",
+      "sen",
+      "tường",
+      "không"
+    ],
+    "answer": "Dạ sen âm tường có nhiều mẫu hiện đại, đẹp và gọn không gian. Anh/chị thích phong cách tối giản hay sang trọng để em gửi mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_038",
+    "question": "sen âm tường loại nào tốt",
+    "keywords": [
+      "âm",
+      "tốt",
+      "loại",
+      "sen",
+      "nào",
+      "tường"
+    ],
+    "answer": "Dạ sen âm tường có nhiều mẫu hiện đại, đẹp và gọn không gian. Anh/chị thích phong cách tối giản hay sang trọng để em gửi mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_039",
+    "question": "nên mua sen âm tường hãng nào",
+    "keywords": [
+      "âm",
+      "nên",
+      "hãng",
+      "mua",
+      "sen",
+      "nào",
+      "tường"
+    ],
+    "answer": "Dạ sen âm tường có nhiều mẫu hiện đại, đẹp và gọn không gian. Anh/chị thích phong cách tối giản hay sang trọng để em gửi mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_040",
+    "question": "sen âm tường có sẵn không",
+    "keywords": [
+      "âm",
+      "có",
+      "sen",
+      "tường",
+      "sẵn",
+      "không"
+    ],
+    "answer": "Dạ sen âm tường có nhiều mẫu hiện đại, đẹp và gọn không gian. Anh/chị thích phong cách tối giản hay sang trọng để em gửi mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_041",
+    "question": "tư vấn sen âm tường",
+    "keywords": [
+      "âm",
+      "tư",
+      "tường",
+      "sen",
+      "vấn"
+    ],
+    "answer": "Dạ sen âm tường có nhiều mẫu hiện đại, đẹp và gọn không gian. Anh/chị thích phong cách tối giản hay sang trọng để em gửi mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_042",
+    "question": "sen âm tường bảo hành thế nào",
+    "keywords": [
+      "âm",
+      "thế",
+      "bảo",
+      "hành",
+      "sen",
+      "nào",
+      "tường"
+    ],
+    "answer": "Dạ sen âm tường có nhiều mẫu hiện đại, đẹp và gọn không gian. Anh/chị thích phong cách tối giản hay sang trọng để em gửi mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_043",
+    "question": "sen âm tường lắp đặt ra sao",
+    "keywords": [
+      "âm",
+      "lắp",
+      "ra",
+      "sao",
+      "sen",
+      "đặt",
+      "tường"
+    ],
+    "answer": "Dạ sen âm tường có nhiều mẫu hiện đại, đẹp và gọn không gian. Anh/chị thích phong cách tối giản hay sang trọng để em gửi mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_044",
+    "question": "sen âm tường phù hợp nhà nhỏ không",
+    "keywords": [
+      "âm",
+      "nhà",
+      "sen",
+      "tường",
+      "phù",
+      "không",
+      "hợp",
+      "nhỏ"
+    ],
+    "answer": "Dạ sen âm tường có nhiều mẫu hiện đại, đẹp và gọn không gian. Anh/chị thích phong cách tối giản hay sang trọng để em gửi mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_045",
+    "question": "sen âm tường mẫu đẹp",
+    "keywords": [
+      "âm",
+      "đẹp",
+      "sen",
+      "mẫu",
+      "tường"
+    ],
+    "answer": "Dạ sen âm tường có nhiều mẫu hiện đại, đẹp và gọn không gian. Anh/chị thích phong cách tối giản hay sang trọng để em gửi mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_046",
+    "question": "vòi bếp giá bao nhiêu",
+    "keywords": [
+      "vòi",
+      "bao",
+      "bếp",
+      "giá",
+      "nhiêu"
+    ],
+    "answer": "Dạ vòi bếp có nhiều mẫu nóng lạnh, dây rút và xoay linh hoạt. Anh/chị cần loại cho chậu 1 hố hay 2 hố để em tư vấn nhanh nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_047",
+    "question": "có vòi bếp không",
+    "keywords": [
+      "vòi",
+      "bếp",
+      "có",
+      "không"
+    ],
+    "answer": "Dạ vòi bếp có nhiều mẫu nóng lạnh, dây rút và xoay linh hoạt. Anh/chị cần loại cho chậu 1 hố hay 2 hố để em tư vấn nhanh nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_048",
+    "question": "vòi bếp loại nào tốt",
+    "keywords": [
+      "vòi",
+      "bếp",
+      "tốt",
+      "loại",
+      "nào"
+    ],
+    "answer": "Dạ vòi bếp có nhiều mẫu nóng lạnh, dây rút và xoay linh hoạt. Anh/chị cần loại cho chậu 1 hố hay 2 hố để em tư vấn nhanh nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_049",
+    "question": "nên mua vòi bếp hãng nào",
+    "keywords": [
+      "vòi",
+      "nên",
+      "bếp",
+      "hãng",
+      "mua",
+      "nào"
+    ],
+    "answer": "Dạ vòi bếp có nhiều mẫu nóng lạnh, dây rút và xoay linh hoạt. Anh/chị cần loại cho chậu 1 hố hay 2 hố để em tư vấn nhanh nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_050",
+    "question": "vòi bếp có sẵn không",
+    "keywords": [
+      "vòi",
+      "bếp",
+      "có",
+      "sẵn",
+      "không"
+    ],
+    "answer": "Dạ vòi bếp có nhiều mẫu nóng lạnh, dây rút và xoay linh hoạt. Anh/chị cần loại cho chậu 1 hố hay 2 hố để em tư vấn nhanh nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_051",
+    "question": "tư vấn vòi bếp",
+    "keywords": [
+      "vấn",
+      "tư",
+      "vòi",
+      "bếp"
+    ],
+    "answer": "Dạ vòi bếp có nhiều mẫu nóng lạnh, dây rút và xoay linh hoạt. Anh/chị cần loại cho chậu 1 hố hay 2 hố để em tư vấn nhanh nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_052",
+    "question": "vòi bếp bảo hành thế nào",
+    "keywords": [
+      "vòi",
+      "thế",
+      "bếp",
+      "bảo",
+      "hành",
+      "nào"
+    ],
+    "answer": "Dạ vòi bếp có nhiều mẫu nóng lạnh, dây rút và xoay linh hoạt. Anh/chị cần loại cho chậu 1 hố hay 2 hố để em tư vấn nhanh nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_053",
+    "question": "vòi bếp lắp đặt ra sao",
+    "keywords": [
+      "vòi",
+      "bếp",
+      "lắp",
+      "ra",
+      "sao",
+      "đặt"
+    ],
+    "answer": "Dạ vòi bếp có nhiều mẫu nóng lạnh, dây rút và xoay linh hoạt. Anh/chị cần loại cho chậu 1 hố hay 2 hố để em tư vấn nhanh nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_054",
+    "question": "vòi bếp phù hợp nhà nhỏ không",
+    "keywords": [
+      "vòi",
+      "nhà",
+      "bếp",
+      "phù",
+      "không",
+      "hợp",
+      "nhỏ"
+    ],
+    "answer": "Dạ vòi bếp có nhiều mẫu nóng lạnh, dây rút và xoay linh hoạt. Anh/chị cần loại cho chậu 1 hố hay 2 hố để em tư vấn nhanh nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_055",
+    "question": "vòi bếp mẫu đẹp",
+    "keywords": [
+      "vòi",
+      "bếp",
+      "mẫu",
+      "đẹp"
+    ],
+    "answer": "Dạ vòi bếp có nhiều mẫu nóng lạnh, dây rút và xoay linh hoạt. Anh/chị cần loại cho chậu 1 hố hay 2 hố để em tư vấn nhanh nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_056",
+    "question": "bồn cầu treo tường giá bao nhiêu",
+    "keywords": [
+      "bồn",
+      "bao",
+      "treo",
+      "giá",
+      "cầu",
+      "nhiêu",
+      "tường"
+    ],
+    "answer": "Dạ bồn cầu treo tường phù hợp các không gian hiện đại và cần xử lý phần khung âm tường. Anh/chị nếu cần em có thể tư vấn thêm yêu cầu kỹ thuật lắp đặt nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_057",
+    "question": "có bồn cầu treo tường không",
+    "keywords": [
+      "bồn",
+      "có",
+      "treo",
+      "cầu",
+      "tường",
+      "không"
+    ],
+    "answer": "Dạ bồn cầu treo tường phù hợp các không gian hiện đại và cần xử lý phần khung âm tường. Anh/chị nếu cần em có thể tư vấn thêm yêu cầu kỹ thuật lắp đặt nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_058",
+    "question": "bồn cầu treo tường loại nào tốt",
+    "keywords": [
+      "bồn",
+      "tốt",
+      "loại",
+      "treo",
+      "cầu",
+      "nào",
+      "tường"
+    ],
+    "answer": "Dạ bồn cầu treo tường phù hợp các không gian hiện đại và cần xử lý phần khung âm tường. Anh/chị nếu cần em có thể tư vấn thêm yêu cầu kỹ thuật lắp đặt nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_059",
+    "question": "nên mua bồn cầu treo tường hãng nào",
+    "keywords": [
+      "nên",
+      "bồn",
+      "hãng",
+      "treo",
+      "mua",
+      "cầu",
+      "nào",
+      "tường"
+    ],
+    "answer": "Dạ bồn cầu treo tường phù hợp các không gian hiện đại và cần xử lý phần khung âm tường. Anh/chị nếu cần em có thể tư vấn thêm yêu cầu kỹ thuật lắp đặt nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_060",
+    "question": "bồn cầu treo tường có sẵn không",
+    "keywords": [
+      "bồn",
+      "có",
+      "treo",
+      "cầu",
+      "tường",
+      "sẵn",
+      "không"
+    ],
+    "answer": "Dạ bồn cầu treo tường phù hợp các không gian hiện đại và cần xử lý phần khung âm tường. Anh/chị nếu cần em có thể tư vấn thêm yêu cầu kỹ thuật lắp đặt nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_061",
+    "question": "tư vấn bồn cầu treo tường",
+    "keywords": [
+      "bồn",
+      "tư",
+      "tường",
+      "treo",
+      "cầu",
+      "vấn"
+    ],
+    "answer": "Dạ bồn cầu treo tường phù hợp các không gian hiện đại và cần xử lý phần khung âm tường. Anh/chị nếu cần em có thể tư vấn thêm yêu cầu kỹ thuật lắp đặt nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_062",
+    "question": "bồn cầu treo tường bảo hành thế nào",
+    "keywords": [
+      "thế",
+      "bồn",
+      "bảo",
+      "hành",
+      "treo",
+      "cầu",
+      "nào",
+      "tường"
+    ],
+    "answer": "Dạ bồn cầu treo tường phù hợp các không gian hiện đại và cần xử lý phần khung âm tường. Anh/chị nếu cần em có thể tư vấn thêm yêu cầu kỹ thuật lắp đặt nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_063",
+    "question": "bồn cầu treo tường lắp đặt ra sao",
+    "keywords": [
+      "bồn",
+      "lắp",
+      "ra",
+      "sao",
+      "treo",
+      "đặt",
+      "cầu",
+      "tường"
+    ],
+    "answer": "Dạ bồn cầu treo tường phù hợp các không gian hiện đại và cần xử lý phần khung âm tường. Anh/chị nếu cần em có thể tư vấn thêm yêu cầu kỹ thuật lắp đặt nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_064",
+    "question": "bồn cầu treo tường phù hợp nhà nhỏ không",
+    "keywords": [
+      "bồn",
+      "nhà",
+      "treo",
+      "cầu",
+      "tường",
+      "phù",
+      "không",
+      "hợp",
+      "nhỏ"
+    ],
+    "answer": "Dạ bồn cầu treo tường phù hợp các không gian hiện đại và cần xử lý phần khung âm tường. Anh/chị nếu cần em có thể tư vấn thêm yêu cầu kỹ thuật lắp đặt nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_065",
+    "question": "bồn cầu treo tường mẫu đẹp",
+    "keywords": [
+      "bồn",
+      "đẹp",
+      "treo",
+      "mẫu",
+      "cầu",
+      "tường"
+    ],
+    "answer": "Dạ bồn cầu treo tường phù hợp các không gian hiện đại và cần xử lý phần khung âm tường. Anh/chị nếu cần em có thể tư vấn thêm yêu cầu kỹ thuật lắp đặt nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_066",
+    "question": "phòng xông hơi giá bao nhiêu",
+    "keywords": [
+      "phòng",
+      "bao",
+      "hơi",
+      "giá",
+      "nhiêu",
+      "xông"
+    ],
+    "answer": "Dạ bên em có thể hỗ trợ tư vấn phòng xông hơi theo diện tích và nhu cầu sử dụng. Anh/chị cho em xin kích thước dự kiến để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_067",
+    "question": "có phòng xông hơi không",
+    "keywords": [
+      "phòng",
+      "hơi",
+      "có",
+      "xông",
+      "không"
+    ],
+    "answer": "Dạ bên em có thể hỗ trợ tư vấn phòng xông hơi theo diện tích và nhu cầu sử dụng. Anh/chị cho em xin kích thước dự kiến để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_068",
+    "question": "phòng xông hơi loại nào tốt",
+    "keywords": [
+      "phòng",
+      "hơi",
+      "tốt",
+      "loại",
+      "nào",
+      "xông"
+    ],
+    "answer": "Dạ bên em có thể hỗ trợ tư vấn phòng xông hơi theo diện tích và nhu cầu sử dụng. Anh/chị cho em xin kích thước dự kiến để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_069",
+    "question": "nên mua phòng xông hơi hãng nào",
+    "keywords": [
+      "nên",
+      "phòng",
+      "hơi",
+      "hãng",
+      "mua",
+      "nào",
+      "xông"
+    ],
+    "answer": "Dạ bên em có thể hỗ trợ tư vấn phòng xông hơi theo diện tích và nhu cầu sử dụng. Anh/chị cho em xin kích thước dự kiến để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_070",
+    "question": "phòng xông hơi có sẵn không",
+    "keywords": [
+      "phòng",
+      "hơi",
+      "có",
+      "sẵn",
+      "xông",
+      "không"
+    ],
+    "answer": "Dạ bên em có thể hỗ trợ tư vấn phòng xông hơi theo diện tích và nhu cầu sử dụng. Anh/chị cho em xin kích thước dự kiến để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_071",
+    "question": "tư vấn phòng xông hơi",
+    "keywords": [
+      "phòng",
+      "tư",
+      "hơi",
+      "vấn",
+      "xông"
+    ],
+    "answer": "Dạ bên em có thể hỗ trợ tư vấn phòng xông hơi theo diện tích và nhu cầu sử dụng. Anh/chị cho em xin kích thước dự kiến để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_072",
+    "question": "phòng xông hơi bảo hành thế nào",
+    "keywords": [
+      "thế",
+      "phòng",
+      "hơi",
+      "bảo",
+      "hành",
+      "nào",
+      "xông"
+    ],
+    "answer": "Dạ bên em có thể hỗ trợ tư vấn phòng xông hơi theo diện tích và nhu cầu sử dụng. Anh/chị cho em xin kích thước dự kiến để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_073",
+    "question": "phòng xông hơi lắp đặt ra sao",
+    "keywords": [
+      "phòng",
+      "hơi",
+      "lắp",
+      "ra",
+      "sao",
+      "đặt",
+      "xông"
+    ],
+    "answer": "Dạ bên em có thể hỗ trợ tư vấn phòng xông hơi theo diện tích và nhu cầu sử dụng. Anh/chị cho em xin kích thước dự kiến để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_074",
+    "question": "phòng xông hơi phù hợp nhà nhỏ không",
+    "keywords": [
+      "phòng",
+      "nhà",
+      "hơi",
+      "hợp",
+      "phù",
+      "không",
+      "xông",
+      "nhỏ"
+    ],
+    "answer": "Dạ bên em có thể hỗ trợ tư vấn phòng xông hơi theo diện tích và nhu cầu sử dụng. Anh/chị cho em xin kích thước dự kiến để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_075",
+    "question": "phòng xông hơi mẫu đẹp",
+    "keywords": [
+      "phòng",
+      "hơi",
+      "đẹp",
+      "mẫu",
+      "xông"
+    ],
+    "answer": "Dạ bên em có thể hỗ trợ tư vấn phòng xông hơi theo diện tích và nhu cầu sử dụng. Anh/chị cho em xin kích thước dự kiến để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_076",
+    "question": "lavabo đôi giá bao nhiêu",
+    "keywords": [
+      "đôi",
+      "bao",
+      "giá",
+      "lavabo",
+      "nhiêu"
+    ],
+    "answer": "Dạ lavabo đôi phù hợp phòng tắm rộng hoặc nhu cầu sử dụng đồng thời. Anh/chị cho em xin kích thước mặt bàn hoặc không gian lắp để em gợi ý mẫu nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_077",
+    "question": "có lavabo đôi không",
+    "keywords": [
+      "đôi",
+      "lavabo",
+      "có",
+      "không"
+    ],
+    "answer": "Dạ lavabo đôi phù hợp phòng tắm rộng hoặc nhu cầu sử dụng đồng thời. Anh/chị cho em xin kích thước mặt bàn hoặc không gian lắp để em gợi ý mẫu nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_078",
+    "question": "lavabo đôi loại nào tốt",
+    "keywords": [
+      "đôi",
+      "tốt",
+      "loại",
+      "lavabo",
+      "nào"
+    ],
+    "answer": "Dạ lavabo đôi phù hợp phòng tắm rộng hoặc nhu cầu sử dụng đồng thời. Anh/chị cho em xin kích thước mặt bàn hoặc không gian lắp để em gợi ý mẫu nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_079",
+    "question": "nên mua lavabo đôi hãng nào",
+    "keywords": [
+      "nên",
+      "đôi",
+      "hãng",
+      "mua",
+      "lavabo",
+      "nào"
+    ],
+    "answer": "Dạ lavabo đôi phù hợp phòng tắm rộng hoặc nhu cầu sử dụng đồng thời. Anh/chị cho em xin kích thước mặt bàn hoặc không gian lắp để em gợi ý mẫu nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_080",
+    "question": "lavabo đôi có sẵn không",
+    "keywords": [
+      "đôi",
+      "có",
+      "lavabo",
+      "sẵn",
+      "không"
+    ],
+    "answer": "Dạ lavabo đôi phù hợp phòng tắm rộng hoặc nhu cầu sử dụng đồng thời. Anh/chị cho em xin kích thước mặt bàn hoặc không gian lắp để em gợi ý mẫu nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_081",
+    "question": "tư vấn lavabo đôi",
+    "keywords": [
+      "vấn",
+      "tư",
+      "đôi",
+      "lavabo"
+    ],
+    "answer": "Dạ lavabo đôi phù hợp phòng tắm rộng hoặc nhu cầu sử dụng đồng thời. Anh/chị cho em xin kích thước mặt bàn hoặc không gian lắp để em gợi ý mẫu nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_082",
+    "question": "lavabo đôi bảo hành thế nào",
+    "keywords": [
+      "đôi",
+      "thế",
+      "bảo",
+      "hành",
+      "lavabo",
+      "nào"
+    ],
+    "answer": "Dạ lavabo đôi phù hợp phòng tắm rộng hoặc nhu cầu sử dụng đồng thời. Anh/chị cho em xin kích thước mặt bàn hoặc không gian lắp để em gợi ý mẫu nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_083",
+    "question": "lavabo đôi lắp đặt ra sao",
+    "keywords": [
+      "đôi",
+      "lắp",
+      "ra",
+      "sao",
+      "đặt",
+      "lavabo"
+    ],
+    "answer": "Dạ lavabo đôi phù hợp phòng tắm rộng hoặc nhu cầu sử dụng đồng thời. Anh/chị cho em xin kích thước mặt bàn hoặc không gian lắp để em gợi ý mẫu nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_084",
+    "question": "lavabo đôi phù hợp nhà nhỏ không",
+    "keywords": [
+      "đôi",
+      "nhà",
+      "lavabo",
+      "phù",
+      "không",
+      "hợp",
+      "nhỏ"
+    ],
+    "answer": "Dạ lavabo đôi phù hợp phòng tắm rộng hoặc nhu cầu sử dụng đồng thời. Anh/chị cho em xin kích thước mặt bàn hoặc không gian lắp để em gợi ý mẫu nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_085",
+    "question": "lavabo đôi mẫu đẹp",
+    "keywords": [
+      "đôi",
+      "lavabo",
+      "đẹp",
+      "mẫu"
+    ],
+    "answer": "Dạ lavabo đôi phù hợp phòng tắm rộng hoặc nhu cầu sử dụng đồng thời. Anh/chị cho em xin kích thước mặt bàn hoặc không gian lắp để em gợi ý mẫu nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_086",
+    "question": "gương thông minh giá bao nhiêu",
+    "keywords": [
+      "bao",
+      "thông",
+      "giá",
+      "nhiêu",
+      "gương",
+      "minh"
+    ],
+    "answer": "Dạ gương thông minh có nhiều tính năng như led, cảm ứng, sấy gương và hiển thị nhiệt độ. Anh/chị quan tâm tính năng nào nhất để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_087",
+    "question": "có gương thông minh không",
+    "keywords": [
+      "thông",
+      "có",
+      "minh",
+      "gương",
+      "không"
+    ],
+    "answer": "Dạ gương thông minh có nhiều tính năng như led, cảm ứng, sấy gương và hiển thị nhiệt độ. Anh/chị quan tâm tính năng nào nhất để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 7
+  },
+  {
+    "key": "faq_088",
+    "question": "gương thông minh loại nào tốt",
+    "keywords": [
+      "thông",
+      "tốt",
+      "loại",
+      "nào",
+      "gương",
+      "minh"
+    ],
+    "answer": "Dạ gương thông minh có nhiều tính năng như led, cảm ứng, sấy gương và hiển thị nhiệt độ. Anh/chị quan tâm tính năng nào nhất để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_089",
+    "question": "nên mua gương thông minh hãng nào",
+    "keywords": [
+      "nên",
+      "thông",
+      "hãng",
+      "mua",
+      "nào",
+      "gương",
+      "minh"
+    ],
+    "answer": "Dạ gương thông minh có nhiều tính năng như led, cảm ứng, sấy gương và hiển thị nhiệt độ. Anh/chị quan tâm tính năng nào nhất để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_090",
+    "question": "gương thông minh có sẵn không",
+    "keywords": [
+      "thông",
+      "có",
+      "gương",
+      "sẵn",
+      "không",
+      "minh"
+    ],
+    "answer": "Dạ gương thông minh có nhiều tính năng như led, cảm ứng, sấy gương và hiển thị nhiệt độ. Anh/chị quan tâm tính năng nào nhất để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_091",
+    "question": "tư vấn gương thông minh",
+    "keywords": [
+      "thông",
+      "tư",
+      "vấn",
+      "gương",
+      "minh"
+    ],
+    "answer": "Dạ gương thông minh có nhiều tính năng như led, cảm ứng, sấy gương và hiển thị nhiệt độ. Anh/chị quan tâm tính năng nào nhất để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_092",
+    "question": "gương thông minh bảo hành thế nào",
+    "keywords": [
+      "thế",
+      "thông",
+      "bảo",
+      "hành",
+      "nào",
+      "gương",
+      "minh"
+    ],
+    "answer": "Dạ gương thông minh có nhiều tính năng như led, cảm ứng, sấy gương và hiển thị nhiệt độ. Anh/chị quan tâm tính năng nào nhất để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_093",
+    "question": "gương thông minh lắp đặt ra sao",
+    "keywords": [
+      "thông",
+      "lắp",
+      "ra",
+      "sao",
+      "đặt",
+      "gương",
+      "minh"
+    ],
+    "answer": "Dạ gương thông minh có nhiều tính năng như led, cảm ứng, sấy gương và hiển thị nhiệt độ. Anh/chị quan tâm tính năng nào nhất để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_094",
+    "question": "gương thông minh phù hợp nhà nhỏ không",
+    "keywords": [
+      "nhỏ",
+      "thông",
+      "nhà",
+      "gương",
+      "phù",
+      "không",
+      "hợp",
+      "minh"
+    ],
+    "answer": "Dạ gương thông minh có nhiều tính năng như led, cảm ứng, sấy gương và hiển thị nhiệt độ. Anh/chị quan tâm tính năng nào nhất để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_095",
+    "question": "gương thông minh mẫu đẹp",
+    "keywords": [
+      "thông",
+      "đẹp",
+      "mẫu",
+      "gương",
+      "minh"
+    ],
+    "answer": "Dạ gương thông minh có nhiều tính năng như led, cảm ứng, sấy gương và hiển thị nhiệt độ. Anh/chị quan tâm tính năng nào nhất để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_096",
+    "question": "tủ gương giá bao nhiêu",
+    "keywords": [
+      "bao",
+      "giá",
+      "nhiêu",
+      "gương",
+      "tủ"
+    ],
+    "answer": "Dạ tủ gương rất tiện để tăng không gian lưu trữ và giữ phòng tắm gọn gàng. Anh/chị cho em xin kích thước mong muốn để em tư vấn bộ phù hợp nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "faq_097",
+    "question": "có tủ gương không",
+    "keywords": [
+      "gương",
+      "tủ",
+      "có",
+      "không"
+    ],
+    "answer": "Dạ tủ gương rất tiện để tăng không gian lưu trữ và giữ phòng tắm gọn gàng. Anh/chị cho em xin kích thước mong muốn để em tư vấn bộ phù hợp nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_098",
+    "question": "tủ gương loại nào tốt",
+    "keywords": [
+      "tốt",
+      "loại",
+      "nào",
+      "gương",
+      "tủ"
+    ],
+    "answer": "Dạ tủ gương rất tiện để tăng không gian lưu trữ và giữ phòng tắm gọn gàng. Anh/chị cho em xin kích thước mong muốn để em tư vấn bộ phù hợp nhé.",
+    "productIds": [],
+    "priority": 8
+  },
+  {
+    "key": "faq_099",
+    "question": "nên mua tủ gương hãng nào",
+    "keywords": [
+      "nên",
+      "hãng",
+      "mua",
+      "nào",
+      "gương",
+      "tủ"
+    ],
+    "answer": "Dạ tủ gương rất tiện để tăng không gian lưu trữ và giữ phòng tắm gọn gàng. Anh/chị cho em xin kích thước mong muốn để em tư vấn bộ phù hợp nhé.",
+    "productIds": [],
+    "priority": 6
+  },
+  {
+    "key": "faq_100",
+    "question": "tủ gương có sẵn không",
+    "keywords": [
+      "có",
+      "gương",
+      "sẵn",
+      "tủ",
+      "không"
+    ],
+    "answer": "Dạ tủ gương rất tiện để tăng không gian lưu trữ và giữ phòng tắm gọn gàng. Anh/chị cho em xin kích thước mong muốn để em tư vấn bộ phù hợp nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  
+  {
+    "key": "budget_5m",
+    "question": "ngân sách khoảng 5 triệu",
+    "keywords": ["5 triệu", "5tr", "năm triệu", "tầm 5 triệu", "khoảng 5 triệu", "ngân sách 5 triệu"],
+    "answer": "Dạ với ngân sách khoảng 5 triệu, bên em sẽ ưu tiên các mẫu cơ bản hoặc dòng nhỏ gọn. Anh/chị cho em biết mình đang quan tâm sản phẩm nào để em gợi ý đúng hơn nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "budget_7m",
+    "question": "ngân sách khoảng 7 triệu",
+    "keywords": ["7 triệu", "7tr", "bảy triệu", "tầm 7 triệu", "khoảng 7 triệu", "ngân sách 7 triệu"],
+    "answer": "Dạ với mức khoảng 7 triệu, bên em có thể gợi ý một số mẫu phù hợp tùy theo loại sản phẩm và nhu cầu sử dụng. Anh/chị đang tìm dòng nào ạ?",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "budget_8m",
+    "question": "ngân sách khoảng 8 triệu",
+    "keywords": ["8 triệu", "8tr", "tám triệu", "tầm 8 triệu", "khoảng 8 triệu", "ngân sách 8 triệu"],
+    "answer": "Dạ với ngân sách khoảng 8 triệu, bên em có một số lựa chọn khá ổn ở phân khúc phổ thông. Anh/chị cho em xin loại sản phẩm đang quan tâm để em gợi ý sát hơn nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "budget_10m",
+    "question": "ngân sách khoảng 10 triệu",
+    "keywords": ["10 triệu", "10tr", "mười triệu", "tầm 10 triệu", "khoảng 10 triệu", "ngân sách 10 triệu"],
+    "answer": "Dạ với ngân sách khoảng 10 triệu, bên em có thể gợi ý một số mẫu phù hợp theo nhu cầu và kích thước. Anh/chị đang quan tâm bồn tắm, lavabo hay thiết bị nào ạ?",
+    "productIds": [],
+    "priority": 14
+  },
+  {
+    "key": "budget_12m",
+    "question": "ngân sách khoảng 12 triệu",
+    "keywords": ["12 triệu", "12tr", "mười hai triệu", "tầm 12 triệu", "khoảng 12 triệu", "ngân sách 12 triệu"],
+    "answer": "Dạ khoảng 12 triệu là mức ngân sách có khá nhiều lựa chọn tùy theo dòng sản phẩm. Anh/chị cho em xin nhu cầu cụ thể để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "budget_15m",
+    "question": "ngân sách khoảng 15 triệu",
+    "keywords": ["15 triệu", "15tr", "mười lăm triệu", "tầm 15 triệu", "khoảng 15 triệu", "ngân sách 15 triệu"],
+    "answer": "Dạ với mức ngân sách khoảng 15 triệu, bên em có thể gợi ý một số mẫu khá ổn. Anh/chị đang tìm bồn tắm thường, bồn tắm massage hay sản phẩm khác ạ?",
+    "productIds": [],
+    "priority": 14
+  },
+  {
+    "key": "budget_20m",
+    "question": "ngân sách khoảng 20 triệu",
+    "keywords": ["20 triệu", "20tr", "hai mươi triệu", "tầm 20 triệu", "khoảng 20 triệu", "ngân sách 20 triệu"],
+    "answer": "Dạ với ngân sách khoảng 20 triệu, anh/chị có thể tham khảo được khá nhiều mẫu đẹp và cấu hình tốt. Anh/chị cho em xin loại sản phẩm để em tư vấn đúng nhu cầu nhé.",
+    "productIds": [],
+    "priority": 13
+  },
+  {
+    "key": "budget_25m",
+    "question": "ngân sách khoảng 25 triệu",
+    "keywords": ["25 triệu", "25tr", "hai mươi lăm triệu", "tầm 25 triệu", "khoảng 25 triệu", "ngân sách 25 triệu"],
+    "answer": "Dạ mức 25 triệu có thể cân nhắc nhiều mẫu trung cao cấp tùy loại sản phẩm. Anh/chị đang ưu tiên thiết kế, kích thước hay tính năng nào để em gợi ý ạ?",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "budget_30m",
+    "question": "ngân sách khoảng 30 triệu",
+    "keywords": ["30 triệu", "30tr", "ba mươi triệu", "tầm 30 triệu", "khoảng 30 triệu", "ngân sách 30 triệu"],
+    "answer": "Dạ với ngân sách khoảng 30 triệu, bên em có nhiều lựa chọn đẹp ở phân khúc cao hơn. Anh/chị đang quan tâm dòng sản phẩm nào để em gợi ý chuẩn hơn nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "budget_under_10m",
+    "question": "ngân sách dưới 10 triệu",
+    "keywords": ["dưới 10 triệu", "duoi 10 trieu", "dưới 10tr", "tối đa 10 triệu", "không quá 10 triệu"],
+    "answer": "Dạ nếu ngân sách dưới 10 triệu, bên em sẽ ưu tiên các mẫu phổ thông hoặc thiết kế gọn. Anh/chị cho em biết sản phẩm cần tìm để em lọc nhanh nhé.",
+    "productIds": [],
+    "priority": 14
+  },
+  {
+    "key": "budget_under_15m",
+    "question": "ngân sách dưới 15 triệu",
+    "keywords": ["dưới 15 triệu", "duoi 15 trieu", "dưới 15tr", "tối đa 15 triệu", "không quá 15 triệu"],
+    "answer": "Dạ với ngân sách dưới 15 triệu, bên em có thể gợi ý một số mẫu phù hợp theo nhu cầu sử dụng thực tế. Anh/chị đang tìm sản phẩm nào ạ?",
+    "productIds": [],
+    "priority": 13
+  },
+  {
+    "key": "budget_under_20m",
+    "question": "ngân sách dưới 20 triệu",
+    "keywords": ["dưới 20 triệu", "duoi 20 trieu", "dưới 20tr", "tối đa 20 triệu", "không quá 20 triệu"],
+    "answer": "Dạ dưới 20 triệu thì mình có khá nhiều lựa chọn tùy theo loại hàng và kích thước. Anh/chị cho em biết sản phẩm quan tâm để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "budget_over_10m",
+    "question": "ngân sách trên 10 triệu",
+    "keywords": ["trên 10 triệu", "hon 10 trieu", "trên 10tr", "hơn 10 triệu", "ngân sách hơn 10 triệu"],
+    "answer": "Dạ với mức trên 10 triệu, mình có thể mở rộng sang nhiều mẫu chất lượng tốt hơn. Anh/chị đang muốn ưu tiên giá, kích thước hay tính năng ạ?",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "budget_over_20m",
+    "question": "ngân sách trên 20 triệu",
+    "keywords": ["trên 20 triệu", "hon 20 trieu", "trên 20tr", "hơn 20 triệu", "ngân sách hơn 20 triệu"],
+    "answer": "Dạ trên 20 triệu thì bên em có nhiều mẫu đẹp và cấu hình tốt hơn ở phân khúc trung cao cấp. Anh/chị đang cần dòng nào để em gợi ý nhanh nhé.",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "budget_range_10_15m",
+    "question": "ngân sách từ 10 đến 15 triệu",
+    "keywords": ["10 đến 15 triệu", "10-15 triệu", "10 15 triệu", "từ 10 đến 15 triệu", "khoảng 10 đến 15 triệu"],
+    "answer": "Dạ tầm 10 đến 15 triệu là mức khá dễ chọn mẫu phù hợp. Anh/chị cho em biết loại sản phẩm để em gợi ý theo đúng tầm giá nhé.",
+    "productIds": [],
+    "priority": 13
+  },
+  {
+    "key": "budget_range_15_20m",
+    "question": "ngân sách từ 15 đến 20 triệu",
+    "keywords": ["15 đến 20 triệu", "15-20 triệu", "15 20 triệu", "từ 15 đến 20 triệu", "khoảng 15 đến 20 triệu"],
+    "answer": "Dạ trong khoảng 15 đến 20 triệu, bên em có một số mẫu rất đáng cân nhắc. Anh/chị đang tìm bồn tắm, lavabo hay sản phẩm nào ạ?",
+    "productIds": [],
+    "priority": 13
+  },
+  {
+    "key": "budget_range_20_30m",
+    "question": "ngân sách từ 20 đến 30 triệu",
+    "keywords": ["20 đến 30 triệu", "20-30 triệu", "20 30 triệu", "từ 20 đến 30 triệu", "khoảng 20 đến 30 triệu"],
+    "answer": "Dạ mức 20 đến 30 triệu có khá nhiều lựa chọn đẹp ở phân khúc cao hơn. Anh/chị cho em biết loại sản phẩm và kích thước mong muốn nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "ask_price_general",
+    "question": "giá bao nhiêu",
+    "keywords": ["giá", "bao nhiêu", "tầm bao nhiêu", "chi phí", "mức giá", "hỏi giá"],
+    "answer": "Dạ giá sẽ phụ thuộc vào loại sản phẩm, kích thước và tính năng. Anh/chị cho em biết mình đang quan tâm sản phẩm nào để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 11
+  },
+  {
+    "key": "ask_cheapest",
+    "question": "mẫu rẻ nhất",
+    "keywords": ["rẻ nhất", "giá rẻ nhất", "mẫu rẻ nhất", "loại rẻ nhất", "thấp nhất"],
+    "answer": "Dạ nếu anh/chị muốn ưu tiên mức giá thấp, bên em có thể lọc các mẫu cơ bản và tiết kiệm chi phí hơn. Anh/chị cho em biết loại sản phẩm để em gợi ý nhé.",
+    "productIds": [],
+    "priority": 11
+  },
+  {
+    "key": "ask_mid_range_price",
+    "question": "mức giá tầm trung",
+    "keywords": ["tầm trung", "giá tầm trung", "mức trung", "phân khúc tầm trung", "giá vừa phải"],
+    "answer": "Dạ nếu mình ưu tiên phân khúc tầm trung, bên em có khá nhiều mẫu cân bằng giữa giá và tính năng. Anh/chị đang tìm dòng sản phẩm nào ạ?",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "ask_high_end_price",
+    "question": "mức giá cao cấp",
+    "keywords": ["cao cấp", "giá cao cấp", "phân khúc cao", "hàng cao cấp", "mẫu cao cấp"],
+    "answer": "Dạ nếu anh/chị quan tâm phân khúc cao cấp, bên em có nhiều mẫu đẹp với cấu hình và hoàn thiện tốt hơn. Anh/chị đang nhắm đến sản phẩm nào để em tư vấn nhé.",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "ask_budget_advice",
+    "question": "nên chọn theo ngân sách nào",
+    "keywords": ["ngân sách", "nên chọn ngân sách", "tư vấn ngân sách", "tầm giá nào", "nên mua khoảng bao nhiêu"],
+    "answer": "Dạ để chọn ngân sách phù hợp, mình nên dựa vào loại sản phẩm, diện tích lắp đặt và nhu cầu sử dụng. Anh/chị cho em biết nhu cầu cụ thể để em tư vấn hợp lý hơn nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "budget_only_number",
+    "question": "chỉ nhắn số tiền",
+    "keywords": ["triệu", "tr", "ngân sách", "tầm tiền", "mức tiền"],
+    "answer": "Dạ anh/chị đang nhắc tới mức ngân sách phải không ạ? Anh/chị cho em biết mình đang quan tâm sản phẩm nào như bồn tắm, lavabo, sen vòi... để em gợi ý đúng tầm giá nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "ask_installation_cost",
+    "question": "chi phí lắp đặt bao nhiêu",
+    "keywords": ["chi phí lắp đặt", "phí lắp đặt", "tiền lắp đặt", "lắp đặt bao nhiêu", "thi công bao nhiêu"],
+    "answer": "Dạ chi phí lắp đặt sẽ tùy vào loại sản phẩm, hiện trạng công trình và khu vực thi công. Anh/chị cho em xin thông tin cụ thể để em báo sát hơn nhé.",
+    "productIds": [],
+    "priority": 11
+  },
+  {
+    "key": "ask_shipping_cost",
+    "question": "phí vận chuyển bao nhiêu",
+    "keywords": ["phí vận chuyển", "tiền ship", "ship bao nhiêu", "cước giao hàng", "phí giao hàng"],
+    "answer": "Dạ phí vận chuyển sẽ phụ thuộc vào địa chỉ nhận hàng, kích thước sản phẩm và số lượng. Anh/chị cho em xin khu vực nhận hàng để em báo nhanh nhé.",
+    "productIds": [],
+    "priority": 11
+  },
+  {
+    "key": "ask_discount",
+    "question": "có giảm giá không",
+    "keywords": ["giảm giá", "khuyến mãi", "ưu đãi", "bớt giá", "chiết khấu", "sale không"],
+    "answer": "Dạ tùy từng thời điểm và từng dòng sản phẩm sẽ có mức ưu đãi khác nhau. Anh/chị gửi giúp em mẫu quan tâm để em kiểm tra chương trình tốt nhất nhé.",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "ask_best_value",
+    "question": "mẫu đáng tiền nhất",
+    "keywords": ["đáng tiền", "đáng mua", "giá tốt", "hiệu quả nhất", "value for money"],
+    "answer": "Dạ nếu ưu tiên mẫu đáng tiền, bên em sẽ chọn các sản phẩm cân bằng giữa giá, độ bền và tính năng. Anh/chị cho em biết loại sản phẩm để em gợi ý chuẩn hơn nhé.",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "compare_price_levels",
+    "question": "so sánh các mức giá",
+    "keywords": ["so sánh giá", "mức giá khác nhau", "khác nhau thế nào", "giá chênh nhau", "so sánh các tầm giá"],
+    "answer": "Dạ các mức giá sẽ khác nhau chủ yếu ở chất liệu, thương hiệu, kích thước và tính năng đi kèm. Anh/chị đang muốn so sánh dòng sản phẩm nào để em tư vấn cụ thể nhé.",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "ask_total_cost",
+    "question": "tổng chi phí khoảng bao nhiêu",
+    "keywords": ["tổng chi phí", "chi phí trọn gói", "hết bao nhiêu", "khoảng bao nhiêu tiền", "full chi phí"],
+    "answer": "Dạ tổng chi phí thường sẽ gồm giá sản phẩm, vận chuyển và có thể thêm lắp đặt tùy trường hợp. Anh/chị cho em biết sản phẩm và khu vực thi công để em ước tính sát hơn nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "ask_budget_for_family",
+    "question": "ngân sách phù hợp cho gia đình",
+    "keywords": ["ngân sách gia đình", "dùng gia đình", "mua cho gia đình", "nên tầm bao nhiêu", "gia đình nên mua loại nào"],
+    "answer": "Dạ nếu dùng cho gia đình, mức ngân sách phù hợp sẽ tùy vào số người sử dụng, diện tích và nhu cầu thực tế. Anh/chị cho em biết sản phẩm quan tâm để em gợi ý tầm giá hợp lý nhé.",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "size_general",
+    "question": "kích thước như thế nào",
+    "keywords": ["kích thước", "size", "kt", "thông số kích thước", "kích cỡ"],
+    "answer": "Dạ mỗi dòng sản phẩm sẽ có nhiều kích thước khác nhau. Anh/chị gửi giúp em loại sản phẩm hoặc kích thước mong muốn để em gợi ý đúng mẫu nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "size_1m2",
+    "question": "kích thước 1m2",
+    "keywords": ["1m2", "1m20", "1200", "120cm", "dài 1m2"],
+    "answer": "Dạ nếu anh/chị đang tìm size khoảng 1m2 thì đây là nhóm kích thước khá gọn, phù hợp không gian nhỏ. Anh/chị cho em biết đang tìm bồn tắm hay sản phẩm nào để em lọc mẫu nhé.",
+    "productIds": [],
+    "priority": 14
+  },
+  {
+    "key": "size_1m3",
+    "question": "kích thước 1m3",
+    "keywords": ["1m3", "1m30", "1300", "130cm", "dài 1m3"],
+    "answer": "Dạ size khoảng 1m3 phù hợp các không gian vừa và nhỏ. Anh/chị cho em biết sản phẩm cụ thể để em gợi ý mẫu đúng kích thước nhé.",
+    "productIds": [],
+    "priority": 14
+  },
+  {
+    "key": "size_1m4",
+    "question": "kích thước 1m4",
+    "keywords": ["1m4", "1m40", "1400", "140cm", "dài 1m4"],
+    "answer": "Dạ kích thước 1m4 là mức khá phổ biến với không gian vừa. Anh/chị đang tìm mẫu thường hay mẫu massage để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 14
+  },
+  {
+    "key": "size_1m5",
+    "question": "kích thước 1m5",
+    "keywords": ["1m5", "1m50", "1500", "150cm", "dài 1m5"],
+    "answer": "Dạ size 1m5 là kích thước rất hay được hỏi và khá dễ bố trí. Anh/chị cho em biết thêm chiều rộng mong muốn hoặc loại sản phẩm để em gợi ý chuẩn hơn nhé.",
+    "productIds": [],
+    "priority": 16
+  },
+  {
+    "key": "size_1m6",
+    "question": "kích thước 1m6",
+    "keywords": ["1m6", "1m60", "1600", "160cm", "dài 1m6"],
+    "answer": "Dạ kích thước 1m6 phù hợp với khá nhiều không gian gia đình. Anh/chị cho em xin thêm chiều rộng hoặc nhu cầu cụ thể để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 16
+  },
+  {
+    "key": "size_1m7",
+    "question": "kích thước 1m7",
+    "keywords": ["1m7", "1m70", "1700", "170cm", "dài 1m7"],
+    "answer": "Dạ size 1m7 là nhóm kích thước khá thoải mái khi sử dụng. Anh/chị đang tìm mẫu đơn, mẫu đôi hay mẫu massage để em gợi ý đúng hơn nhé.",
+    "productIds": [],
+    "priority": 16
+  },
+  {
+    "key": "size_1m8",
+    "question": "kích thước 1m8",
+    "keywords": ["1m8", "1m80", "1800", "180cm", "dài 1m8"],
+    "answer": "Dạ kích thước 1m8 thường phù hợp với không gian rộng hơn và nhu cầu sử dụng thoải mái. Anh/chị cho em biết thêm chiều rộng và loại sản phẩm nhé.",
+    "productIds": [],
+    "priority": 15
+  },
+  {
+    "key": "size_1m9",
+    "question": "kích thước 1m9",
+    "keywords": ["1m9", "1m90", "1900", "190cm", "dài 1m9"],
+    "answer": "Dạ size 1m9 là nhóm kích thước lớn, phù hợp không gian rộng. Anh/chị cho em biết mẫu đang quan tâm để em kiểm tra các lựa chọn phù hợp nhé.",
+    "productIds": [],
+    "priority": 14
+  },
+  {
+    "key": "size_2m",
+    "question": "kích thước 2m",
+    "keywords": ["2m", "2000", "200cm", "dài 2m"],
+    "answer": "Dạ kích thước khoảng 2m là nhóm khá lớn và cần không gian lắp đặt rộng. Anh/chị cho em biết thêm chiều rộng và loại sản phẩm để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 13
+  },
+  {
+    "key": "size_width_700",
+    "question": "chiều rộng 700",
+    "keywords": ["700", "70cm", "rộng 700", "ngang 700", "700mm"],
+    "answer": "Dạ chiều rộng khoảng 700mm là mức khá phổ biến với nhiều mẫu gọn. Anh/chị cho em biết thêm chiều dài mong muốn để em gợi ý sát hơn nhé.",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "size_width_750",
+    "question": "chiều rộng 750",
+    "keywords": ["750", "75cm", "rộng 750", "ngang 750", "750mm"],
+    "answer": "Dạ chiều rộng khoảng 750mm là mức khá dễ bố trí và sử dụng. Anh/chị cho em thêm chiều dài hoặc loại sản phẩm để em lọc mẫu nhé.",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "size_width_800",
+    "question": "chiều rộng 800",
+    "keywords": ["800", "80cm", "rộng 800", "ngang 800", "800mm"],
+    "answer": "Dạ chiều rộng khoảng 800mm là kích thước khá phổ biến. Anh/chị cho em biết thêm chiều dài hoặc nhu cầu sử dụng để em gợi ý đúng mẫu nhé.",
+    "productIds": [],
+    "priority": 10
+  },
+  {
+    "key": "size_width_850",
+    "question": "chiều rộng 850",
+    "keywords": ["850", "85cm", "rộng 850", "ngang 850", "850mm"],
+    "answer": "Dạ chiều rộng 850mm phù hợp với nhóm sản phẩm rộng rãi hơn một chút. Anh/chị cho em thêm chiều dài mong muốn để em tư vấn chuẩn hơn nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "size_width_900",
+    "question": "chiều rộng 900",
+    "keywords": ["900", "90cm", "rộng 900", "ngang 900", "900mm"],
+    "answer": "Dạ chiều rộng 900mm thường thuộc nhóm khá thoải mái khi sử dụng. Anh/chị cho em thêm chiều dài và loại sản phẩm để em gợi ý phù hợp nhé.",
+    "productIds": [],
+    "priority": 9
+  },
+  {
+    "key": "size_1500_700",
+    "question": "kích thước 1500x700",
+    "keywords": ["1500x700", "1m5 x 700", "1m5x700", "150x70", "1500 700"],
+    "answer": "Dạ kích thước 1500x700 là nhóm khá gọn và phổ biến cho không gian vừa. Anh/chị đang tìm mẫu thường hay massage để em gợi ý nhanh nhé.",
+    "productIds": [],
+    "priority": 16
+  },
+  {
+    "key": "size_1500_750",
+    "question": "kích thước 1500x750",
+    "keywords": ["1500x750", "1m5 x 750", "1m5x750", "1500 750"],
+    "answer": "Dạ size 1500x750 là lựa chọn khá cân đối giữa sự gọn gàng và thoải mái. Anh/chị cho em biết thêm nhu cầu để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 16
+  },
+  {
+    "key": "size_1600_750",
+    "question": "kích thước 1600x750",
+    "keywords": ["1600x750", "1m6 x 750", "1m6x750", "1600 750"],
+    "answer": "Dạ kích thước 1600x750 là size khá được quan tâm cho gia đình. Anh/chị đang tìm mẫu đơn hay massage để em gợi ý đúng hơn nhé.",
+    "productIds": [],
+    "priority": 16
+  },
+  {
+    "key": "size_1600_800",
+    "question": "kích thước 1600x800",
+    "keywords": ["1600x800", "1m6 x 800", "1m6x800", "1600 800"],
+    "answer": "Dạ size 1600x800 khá thoải mái và phổ biến. Anh/chị cho em biết phong cách hoặc mức ngân sách để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 16
+  },
+  {
+    "key": "size_1700_750",
+    "question": "kích thước 1700x750",
+    "keywords": ["1700x750", "1m7 x 750", "1m7x750", "1700 750"],
+    "answer": "Dạ kích thước 1700x750 phù hợp với nhu cầu sử dụng thoải mái hơn. Anh/chị đang tìm dòng nào để em gợi ý chuẩn nhé.",
+    "productIds": [],
+    "priority": 15
+  },
+  {
+    "key": "size_1700_800",
+    "question": "kích thước 1700x800",
+    "keywords": ["1700x800", "1m7 x 800", "1m7x800", "1700 800"],
+    "answer": "Dạ size 1700x800 là một trong những nhóm kích thước khá đẹp và dễ dùng. Anh/chị cho em biết thêm loại sản phẩm hoặc ngân sách nhé.",
+    "productIds": [],
+    "priority": 16
+  },
+  {
+    "key": "size_1700_850",
+    "question": "kích thước 1700x850",
+    "keywords": ["1700x850", "1m7 x 850", "1m7x850", "1700 850"],
+    "answer": "Dạ kích thước 1700x850 thuộc nhóm khá rộng rãi. Anh/chị cho em thêm thông tin về không gian lắp đặt để em tư vấn đúng mẫu nhé.",
+    "productIds": [],
+    "priority": 14
+  },
+  {
+    "key": "size_1800_800",
+    "question": "kích thước 1800x800",
+    "keywords": ["1800x800", "1m8 x 800", "1m8x800", "1800 800"],
+    "answer": "Dạ size 1800x800 phù hợp với không gian lớn hơn và nhu cầu sử dụng thoải mái. Anh/chị cho em biết thêm kiểu dáng mong muốn để em gợi ý nhé.",
+    "productIds": [],
+    "priority": 14
+  },
+  {
+    "key": "size_1800_900",
+    "question": "kích thước 1800x900",
+    "keywords": ["1800x900", "1m8 x 900", "1m8x900", "1800 900"],
+    "answer": "Dạ kích thước 1800x900 là nhóm khá rộng, phù hợp không gian tốt hơn. Anh/chị cho em thêm nhu cầu cụ thể để em lọc mẫu phù hợp nhé.",
+    "productIds": [],
+    "priority": 13
+  },
+  {
+    "key": "size_small_space",
+    "question": "phòng tắm nhỏ nên dùng kích thước nào",
+    "keywords": ["phòng tắm nhỏ", "không gian nhỏ", "nhà tắm nhỏ", "diện tích nhỏ", "chật"],
+    "answer": "Dạ nếu không gian nhỏ, mình nên ưu tiên các kích thước gọn như 1m2 đến 1m5 tùy loại sản phẩm. Anh/chị cho em xin kích thước khu vực lắp đặt để em tư vấn sát hơn nhé.",
+    "productIds": [],
+    "priority": 15
+  },
+  {
+    "key": "size_large_space",
+    "question": "phòng tắm rộng nên dùng kích thước nào",
+    "keywords": ["phòng tắm rộng", "không gian rộng", "nhà tắm rộng", "diện tích lớn", "rộng rãi"],
+    "answer": "Dạ nếu không gian rộng, anh/chị có thể cân nhắc các size lớn hơn để dùng thoải mái hơn. Anh/chị cho em xin kích thước khu vực thực tế để em gợi ý hợp lý nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "size_fit_family",
+    "question": "gia đình nên chọn kích thước nào",
+    "keywords": ["gia đình nên chọn size nào", "size cho gia đình", "kích thước phù hợp gia đình", "dùng gia đình chọn size nào"],
+    "answer": "Dạ kích thước phù hợp cho gia đình sẽ tùy vào diện tích và số người sử dụng. Anh/chị cho em biết không gian lắp đặt và loại sản phẩm để em gợi ý đúng hơn nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "size_two_people",
+    "question": "hai người dùng nên chọn kích thước nào",
+    "keywords": ["2 người", "hai người", "dùng 2 người", "size cho 2 người", "mẫu đôi"],
+    "answer": "Dạ nếu ưu tiên sử dụng thoải mái cho 2 người, mình thường cần nhóm kích thước rộng hơn một chút. Anh/chị cho em biết sản phẩm cụ thể để em gợi ý chính xác nhé.",
+    "productIds": [],
+    "priority": 12
+  },
+  {
+    "key": "size_length_width_question",
+    "question": "nên chọn chiều dài và chiều rộng bao nhiêu",
+    "keywords": ["dài rộng bao nhiêu", "kích thước dài rộng", "chiều dài chiều rộng", "nên chọn size nào", "nên lấy kích thước nào"],
+    "answer": "Dạ để chọn chiều dài và chiều rộng phù hợp, mình nên dựa vào diện tích lắp đặt thực tế và nhu cầu sử dụng. Anh/chị gửi giúp em kích thước khu vực đặt để em tư vấn chính xác nhé.",
+    "productIds": [],
+    "priority": 13
+  },
+  {
+    "key": "size_have_this_dimension",
+    "question": "có kích thước này không",
+    "keywords": ["có size này không", "có kích thước này không", "có loại này không", "có mẫu kích thước này không"],
+    "answer": "Dạ anh/chị gửi giúp em kích thước cụ thể theo dạng dài x rộng, ví dụ 1500x750 hoặc 1700x800, em sẽ kiểm tra mẫu phù hợp cho mình nhé.",
+    "productIds": [],
+    "priority": 11
+  }
+
+]
