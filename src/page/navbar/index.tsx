@@ -75,9 +75,9 @@ function LayoutSaving() {
         const children = item.categories
           .filter((child) => child?.id && child?.name)
           .map((child) => ({
-            key: `/?category=${child!.id}`,
+            key: `list-product/?category=${child!.id}`,
             label: child!.name || "",
-            path: `/?category=${child!.id}`,
+            path: `list-product/?category=${child!.id}`,
           }));
 
         result.push({
@@ -91,18 +91,18 @@ function LayoutSaving() {
 
       if (typeof item.data === "string" && item.name) {
         result.push({
-          key: `/?category=${item.data}`,
+          key: `list-product/?category=${item.data}`,
           label: item.name,
-          path: `/?category=${item.data}`,
+          path: `list-product/?category=${item.data}`,
         });
         return;
       }
 
       if (item.id && item.name) {
         result.push({
-          key: `/?category=${item.id}`,
+          key: `list-product/?category=${item.id}`,
           label: item.name,
-          path: `/?category=${item.id}`,
+          path: `list-product/?category=${item.id}`,
         });
       }
     });
