@@ -2002,7 +2002,7 @@ const Component = () => {
           }),
         );
 
-        navigate("/payment");
+        navigate("/checkout");
         return;
       }
 
