@@ -13,7 +13,9 @@
     "build:production": "vite build --mode production",
     "serve": "vite preview",
     "lint": "eslint . --ext js,ts,tsx",
-    "format": "prettier --write **/*.{js,ts,tsx} && eslint . --ext js,ts,tsx --fix"
+    "format": "prettier --write **/*.{js,ts,tsx} && eslint . --ext js,ts,tsx --fix",
+    "server": "npm run dev --prefix server",
+    "dev:all": "concurrently \"npm run server\" \"npm run dev\""
   },
   "dependencies": {
     "@ant-design/charts": "^2.6.6",
@@ -70,6 +72,7 @@
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
+    "concurrently": "^9.2.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",

@@ -192,7 +192,6 @@
 
 // export type CreateOrderPayload = Omit<OrderDoc, "id">;
 
-
 export type UserLevel = "BTC" | "BTB" | "CTV";
 export type OrderStatus =
   | "PENDING_APPROVAL"
@@ -334,6 +333,15 @@ export type PaymentDoc = {
   source: "ORDER";
   createdAt: string;
   paidAt?: string | null;
+  failedAt?: string | null;
+  updatedAt?: string;
+  paymentGateway?: "VNPAY";
+  gatewayTxnRef?: string;
+  gatewayTransactionNo?: string | null;
+  gatewayResponseCode?: string | null;
+  gatewayTransactionStatus?: string | null;
+  bankCode?: string | null;
+
   dateKey: string;
   monthKey: string;
   hourOfDay: number;

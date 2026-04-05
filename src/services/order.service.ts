@@ -431,6 +431,24 @@ export const createOrder = async (payload: CreateOrderPayload) => {
 
   const batch = writeBatch(db);
 
+  // const safeProducts = payload.products.map((item) => ({
+  //   id: item.id || "",
+  //   name: item.name || "",
+  //   image: item.image || "",
+  //   category: item.category || "",
+  //   unitPrice: Number(item.unitPrice || 0),
+  //   quantity: Number(item.quantity || 0),
+  //   lineTotal: Number(item.lineTotal || 0),
+  //   promotion: item.promotion
+  //     ? {
+  //         campaignId: item.promotion.campaignId || "",
+  //         campaignName: item.promotion.campaignName || "",
+  //         discountType: item.promotion.discountType,
+  //         discountValue: Number(item.promotion.discountValue || 0),
+  //       }
+  //     : null,
+  // }));
+
   const safeProducts = payload.products.map((item) => ({
     id: item.id || "",
     name: item.name || "",
@@ -447,6 +465,10 @@ export const createOrder = async (payload: CreateOrderPayload) => {
           discountValue: Number(item.promotion.discountValue || 0),
         }
       : null,
+    variantId: item.variantId || "",
+    variantIndex: typeof item.variantIndex === "number" ? item.variantIndex : 0,
+    variantLabel: item.variantLabel || "",
+    variantAttributes: item.variantAttributes || {},
   }));
 
   const orderDoc: OrderDoc = {
@@ -484,11 +506,22 @@ export const createOrder = async (payload: CreateOrderPayload) => {
     source: "ORDER",
     createdAt,
     paidAt: payload.statusPayment === "PAID" ? createdAt : null,
+    failedAt: payload.statusPayment === "FAILED" ? createdAt : null,
+    updatedAt: createdAt,
+    gatewayTransactionNo: null,
+    gatewayResponseCode: null,
+    gatewayTransactionStatus: null,
+    bankCode: null,
     dateKey: analyticsTime.dateKey,
     monthKey: analyticsTime.monthKey,
     hourOfDay: analyticsTime.hourOfDay,
     timeBucket: analyticsTime.timeBucket,
   };
+
+  if (payload.typePayment === "BANK_TRANSFER") {
+    paymentDoc.paymentGateway = "VNPAY";
+    paymentDoc.gatewayTxnRef = paymentId;
+  }
 
   batch.set(orderRef, orderDoc);
   batch.set(paymentRef, paymentDoc);
