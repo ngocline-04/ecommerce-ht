@@ -1,30 +1,68 @@
 import { Badge } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import React, { useCallback, useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/App";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { auth, db } from "@/App";
 
 export const CartBadge = () => {
-  const [cartCount, setCartCount] = useState<
-    { id: string; [key: string]: any }[]
-  >([]);
+  const [cartCount, setCartCount] = useState(0);
 
   const getProductInCart = useCallback(async () => {
-    const colRef = collection(db, "CartPending");
-    const snapshot = await getDocs(colRef);
-    const result = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    setCartCount(result);
-}, []);
+    try {
+      const currentEmail = auth.currentUser?.email;
+
+      if (!currentEmail) {
+        setCartCount(0);
+        return;
+      }
+
+      const userQuery = query(
+        collection(db, "Users"),
+        where("email", "==", currentEmail),
+        where("isStaff", "==", false),
+      );
+
+      const userSnapshot = await getDocs(userQuery);
+      const userDoc = userSnapshot.docs[0];
+
+      if (!userDoc) {
+        setCartCount(0);
+        return;
+      }
+
+      const userId = userDoc.id;
+
+      const cartQuery = query(
+        collection(db, "CartPending"),
+        where("idUser", "==", userId),
+      );
+
+      const cartSnapshot = await getDocs(cartQuery);
+
+      setCartCount(cartSnapshot.docs.length);
+    } catch (error) {
+      console.error("Lấy số lượng giỏ hàng thất bại:", error);
+      setCartCount(0);
+    }
+  }, []);
 
   useEffect(() => {
     getProductInCart();
-  }, []);
+
+    const unsubscribe = auth.onAuthStateChanged(() => {
+      getProductInCart();
+    });
+
+    return () => unsubscribe();
+  }, [getProductInCart]);
 
   return (
-    <Badge count={cartCount?.length} size="small">
+    <Badge count={cartCount} size="small">
       <ShoppingCartOutlined />
     </Badge>
   );
