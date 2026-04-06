@@ -964,7 +964,7 @@ const Component = () => {
       width: 180,
       render: (_: unknown, record: OrderDoc) => (
         <div>
-          <div>{record.typePayment === "COD" ? "COD" : "Chuyển khoản"}</div>
+          <div>{record.typePayment === "COD" ? "Thanh toán khi nhận hàng" : "Chuyển khoản"}</div>
           <div className="text-12 text-color-700">
             {renderPaymentStatusText(record.statusPayment as any)}
           </div>
@@ -1094,7 +1094,7 @@ const Component = () => {
                         ]}
                       >
                         <Radio.Group>
-                          <Radio value="COD">COD</Radio>
+                          <Radio value="COD">Thanh toán khi nhận hàng</Radio>
                           <Radio value="BANK_TRANSFER">
                             Thanh toán trực tuyến
                           </Radio>
