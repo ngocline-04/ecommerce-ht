@@ -57,7 +57,7 @@ import {
   toggleCartPendingChecked,
   updateCartPendingQuantity,
 } from "../../services/cart.service";
-import { createVnpayPaymentUrl } from "@/services/payment.services";
+import { createVnpayPaymentUrl, sendCodOrderMail } from "@/services/payment.services";
 
 const { Text } = Typography;
 
@@ -570,6 +570,33 @@ const Component = () => {
         createdBy: auth.currentUser?.uid || "web_customer",
       };
 
+      // if (values.typePayment === "COD") {
+      //   const createdOrder = await createOrder(orderPayload);
+
+      //   await Promise.all([
+      //     updateUserPurchaseStats({
+      //       userId: currentUserProfile.id,
+      //       orderId: createdOrder.id,
+      //       totalAmount: grandTotal,
+      //       usersByPhone: currentUserProfile ? [currentUserProfile] : [],
+      //     }),
+      //     updatePromotionStatsForOrder({
+      //       products: selectedProducts,
+      //       promotions,
+      //     }),
+      //     sendOrderMessageToCustomer({
+      //       userId: currentUserProfile.id,
+      //       customerName: values.customerName,
+      //       products: selectedProducts,
+      //       orderId: createdOrder.id,
+      //     }),
+      //     ...checkedCartItems.map((item) => removeCartPendingItem(item.cartId)),
+      //   ]);
+
+      //   toast.success("Đặt hàng COD thành công");
+      //   await bootstrap();
+      //   return;
+      // }
       if (values.typePayment === "COD") {
         const createdOrder = await createOrder(orderPayload);
 
@@ -593,11 +620,32 @@ const Component = () => {
           ...checkedCartItems.map((item) => removeCartPendingItem(item.cartId)),
         ]);
 
+        try {
+          await sendCodOrderMail({
+            orderId: createdOrder.id,
+            userId: currentUserProfile.id,
+            customerName: values.customerName,
+            customerEmail:
+              (currentUserProfile as any).email ||
+              auth.currentUser?.email ||
+              "",
+            totalAmount: grandTotal,
+          });
+        } catch (mailError) {
+          console.error(mailError);
+          toast.warning(
+            mailError instanceof Error
+              ? `Đặt hàng COD thành công nhưng gửi email thất bại: ${mailError.message}`
+              : "Đặt hàng COD thành công nhưng gửi email xác nhận thất bại",
+          );
+          await bootstrap();
+          return;
+        }
+
         toast.success("Đặt hàng COD thành công");
         await bootstrap();
         return;
       }
-
       const createdOrder = await createOrder(orderPayload);
 
       await Promise.all([
@@ -964,7 +1012,11 @@ const Component = () => {
       width: 180,
       render: (_: unknown, record: OrderDoc) => (
         <div>
-          <div>{record.typePayment === "COD" ? "Thanh toán khi nhận hàng" : "Chuyển khoản"}</div>
+          <div>
+            {record.typePayment === "COD"
+              ? "Thanh toán khi nhận hàng"
+              : "Chuyển khoản"}
+          </div>
           <div className="text-12 text-color-700">
             {renderPaymentStatusText(record.statusPayment as any)}
           </div>

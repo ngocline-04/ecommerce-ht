@@ -492,6 +492,31 @@ export const createOrder = async (payload: CreateOrderPayload) => {
     ...analyticsTime,
   };
 
+  // const paymentDoc: PaymentDoc = {
+  //   id: paymentId,
+  //   orderId,
+  //   idUser: payload.idUser || "",
+  //   customerName: payload.customerName || "",
+  //   customerPhone: payload.customerPhone || "",
+  //   amount: Number(payload.totalAmount || 0),
+  //   totalProductAmount: Number(payload.totalProductAmount || 0),
+  //   shipFee: Number(payload.shipFee || 0),
+  //   status: payload.statusPayment,
+  //   typePayment: payload.typePayment,
+  //   source: "ORDER",
+  //   createdAt,
+  //   paidAt: payload.statusPayment === "PAID" ? createdAt : null,
+  //   failedAt: payload.statusPayment === "FAILED" ? createdAt : null,
+  //   updatedAt: createdAt,
+  //   gatewayTransactionNo: null,
+  //   gatewayResponseCode: null,
+  //   gatewayTransactionStatus: null,
+  //   bankCode: null,
+  //   dateKey: analyticsTime.dateKey,
+  //   monthKey: analyticsTime.monthKey,
+  //   hourOfDay: analyticsTime.hourOfDay,
+  //   timeBucket: analyticsTime.timeBucket,
+  // };
   const paymentDoc: PaymentDoc = {
     id: paymentId,
     orderId,
@@ -511,13 +536,13 @@ export const createOrder = async (payload: CreateOrderPayload) => {
     gatewayTransactionNo: null,
     gatewayResponseCode: null,
     gatewayTransactionStatus: null,
+    gatewayPayDate: null as any,
     bankCode: null,
     dateKey: analyticsTime.dateKey,
     monthKey: analyticsTime.monthKey,
     hourOfDay: analyticsTime.hourOfDay,
     timeBucket: analyticsTime.timeBucket,
   };
-
   if (payload.typePayment === "BANK_TRANSFER") {
     paymentDoc.paymentGateway = "VNPAY";
     paymentDoc.gatewayTxnRef = paymentId;

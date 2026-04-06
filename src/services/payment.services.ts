@@ -34,3 +34,36 @@ export const createVnpayPaymentUrl = async (payload: {
     paymentUrl: string;
   };
 };
+
+export const sendCodOrderMail = async (payload: {
+  orderId: string;
+  userId: string;
+  customerName: string;
+  customerEmail: string;
+  totalAmount: number;
+}) => {
+  const response = await fetch(
+    `${VNPAY_API_BASE_URL}/api/vnpay/send-cod-mail`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    },
+  );
+  console.log(
+    "Gửi email xác nhận COD cho đơn hàng:",
+    payload.orderId,
+    "đến:",
+    payload.customerEmail,
+    response,
+  );
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data?.message || "Không gửi được email xác nhận COD");
+  }
+
+  return data;
+};

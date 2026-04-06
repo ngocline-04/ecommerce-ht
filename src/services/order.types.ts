@@ -341,7 +341,6 @@ export type PaymentDoc = {
   gatewayResponseCode?: string | null;
   gatewayTransactionStatus?: string | null;
   bankCode?: string | null;
-
   dateKey: string;
   monthKey: string;
   hourOfDay: number;
