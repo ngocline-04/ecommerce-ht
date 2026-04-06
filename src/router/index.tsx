@@ -20,11 +20,11 @@ const ProtectedRoute = ({
   requiredRoles?: string[];
   titleId?: string;
 }) => {
-  const user = auth.currentUser;
+  //const user = auth.currentUser;
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
+  // if (!user) {
+  //   return <Navigate to="/login" replace />;
+  // }
 
   return <>{element}</>;
 };
