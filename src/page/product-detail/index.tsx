@@ -205,6 +205,7 @@ const getMatchedVariantIndex = (
 
   const attributeMap = getVariantAttributeMap(product);
   const attributeKeys = Object.keys(attributeMap);
+
   if (!attributeKeys.length) return 0;
 
   const selectedEnough = attributeKeys.every((key) =>
@@ -503,6 +504,45 @@ export default function ProductDetailPage() {
     () => Object.keys(variantAttributeMap),
     [variantAttributeMap],
   );
+
+  useEffect(() => {
+    if (!variantAttributeKeys.length) {
+      setSelectedAttributes({});
+      return;
+    }
+
+    setSelectedAttributes((prev) => {
+      const next = { ...prev };
+      let changed = false;
+
+      variantAttributeKeys.forEach((key) => {
+        const options = variantAttributeMap[key] || [];
+
+        if (options.length === 1) {
+          const onlyValue = String(options[0] || "").trim();
+          if (next[key] !== onlyValue) {
+            next[key] = onlyValue;
+            changed = true;
+          }
+        } else if (
+          next[key] &&
+          !options.includes(String(next[key] || "").trim())
+        ) {
+          delete next[key];
+          changed = true;
+        }
+      });
+
+      Object.keys(next).forEach((key) => {
+        if (!variantAttributeKeys.includes(key)) {
+          delete next[key];
+          changed = true;
+        }
+      });
+
+      return changed ? next : prev;
+    });
+  }, [variantAttributeKeys, variantAttributeMap]);
 
   const matchedVariantIndex = useMemo(
     () => getMatchedVariantIndex(product, selectedAttributes),
@@ -1210,14 +1250,15 @@ export default function ProductDetailPage() {
 
                       {item.imageUrls?.length ? (
                         <div className="grid grid-cols-4 gap-12 mobile:grid-cols-2">
-                          {item.imageUrls.map((url, index) => (
+                          {item.imageUrls.map((imageUrl, index) => (
                             <div
                               key={`${item.id}_${index}`}
-                              className="overflow-hidden rounded-radius-m border border-color-300"
+                              className="overflow-hidden rounded-radius-m border border-color-300 bg-color-100"
                             >
                               <Image
-                                src={url}
-                                alt={`review_${index}`}
+                                src={imageUrl}
+                                alt={`review_${item.id}_${index}`}
+                                preview
                                 className="h-[120px] w-full object-cover"
                               />
                             </div>
