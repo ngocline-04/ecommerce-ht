@@ -20,6 +20,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { get } from "lodash";
@@ -180,9 +181,7 @@ export default function LoginPage() {
     async (values: RegisterFormValues) => {
       const fullName = String(values.fullName || "").trim();
       const phoneNumber = normalizePhone(values.phoneNumber);
-      const email = String(values.email || "")
-        .trim()
-        .toLowerCase();
+      const email = String(values.email || "").trim().toLowerCase();
       const password = String(values.password || "");
 
       try {
@@ -206,19 +205,44 @@ export default function LoginPage() {
         }
 
         const usersRef = collection(db, "Users");
-        const existingUserQuery = query(
-          usersRef,
-          where("phoneNumber", "==", phoneNumber),
-          limit(1),
-        );
 
-        const existingUserSnapshot = await getDocs(existingUserQuery);
+        const [existingByEmailSnapshot, existingByPhoneSnapshot] =
+          await Promise.all([
+            getDocs(
+              query(usersRef, where("email", "==", email), limit(1)),
+            ),
+            getDocs(
+              query(usersRef, where("phoneNumber", "==", phoneNumber), limit(1)),
+            ),
+          ]);
 
-        if (existingUserSnapshot.empty) {
+        const existingByEmailDoc = existingByEmailSnapshot.docs[0] || null;
+        const existingByPhoneDoc = existingByPhoneSnapshot.docs[0] || null;
+
+        if (existingByEmailDoc) {
+          await updateDoc(doc(db, "Users", existingByEmailDoc.id), {
+            name: fullName,
+            phoneNumber,
+            email,
+            status: "ACTIVE",
+            isStaff: false,
+            updatedAt: serverTimestamp(),
+          });
+        } else if (existingByPhoneDoc) {
+          await updateDoc(doc(db, "Users", existingByPhoneDoc.id), {
+            name: fullName,
+            phoneNumber,
+            email,
+            status: "ACTIVE",
+            isStaff: false,
+            updatedAt: serverTimestamp(),
+          });
+        } else {
           const customerId = createCustomerId();
 
           await setDoc(doc(db, "Users", customerId), {
             id: customerId,
+            authUid: registerResult.user.uid,
             name: fullName,
             phoneNumber,
             email,
@@ -228,7 +252,7 @@ export default function LoginPage() {
             saleOwnerId: "",
             saleOwnerName: "",
             note: "",
-            level: "CUSTOMER",
+            level: "BTC",
             status: "ACTIVE",
             isStaff: false,
             createdAt: serverTimestamp(),
@@ -265,9 +289,7 @@ export default function LoginPage() {
 
   const onForgotPassword = useCallback(
     async (values: ForgotPasswordFormValues) => {
-      const email = String(values.email || "")
-        .trim()
-        .toLowerCase();
+      const email = String(values.email || "").trim().toLowerCase();
 
       try {
         showLoading();
@@ -347,7 +369,7 @@ export default function LoginPage() {
                   </div>
                   <div className="text-14 leading-24 text-common-1000/80">
                     Nếu số điện thoại đã có trong hệ thống khách hàng, hệ thống
-                    chỉ tạo tài khoản đăng nhập mới mà không thêm trùng hồ sơ.
+                    sẽ cập nhật hồ sơ cũ thay vì bỏ qua tài khoản mới.
                   </div>
                 </div>
               </div>
