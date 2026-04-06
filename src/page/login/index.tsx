@@ -7,6 +7,7 @@ import {
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   updateProfile,
@@ -150,6 +151,13 @@ export default function LoginPage() {
         );
         const { user } = userCredential;
 
+        if (!user.emailVerified) {
+          showErrorDialog(
+            "Email của bạn chưa được xác thực. Vui lòng kiểm tra hộp thư và bấm vào liên kết xác thực trước khi đăng nhập.",
+          );
+          return;
+        }
+
         dispatch(
           setUserInfo({
             email: user?.email,
@@ -190,6 +198,11 @@ export default function LoginPage() {
           await updateProfile(registerResult.user, {
             displayName: fullName,
           });
+
+          await sendEmailVerification(registerResult.user, {
+            url: `${window.location.origin}/login`,
+            handleCodeInApp: false,
+          });
         }
 
         const usersRef = collection(db, "Users");
@@ -225,7 +238,7 @@ export default function LoginPage() {
 
         showSuccessDialog(
           "Đăng ký thành công",
-          "Tài khoản đã được tạo thành công. Vui lòng đăng nhập để tiếp tục.",
+          "Tài khoản đã được tạo thành công. Email xác thực đã được gửi tới hộp thư của bạn. Vui lòng kiểm tra cả Spam/Junk nếu chưa thấy.",
         );
 
         registerForm.resetFields();
@@ -264,8 +277,8 @@ export default function LoginPage() {
         forgotPasswordForm.resetFields();
 
         showSuccessDialog(
-          "Gửi yêu cầu thành công",
-          "Liên kết đặt lại mật khẩu đã được gửi tới email của bạn.",
+          "Gửi email thành công",
+          "Liên kết đặt lại mật khẩu đã được gửi tới email của bạn. Vui lòng kiểm tra cả hộp thư spam nếu chưa thấy.",
         );
       } catch (error: any) {
         showErrorDialog(getAuthErrorMessage(error?.code));
