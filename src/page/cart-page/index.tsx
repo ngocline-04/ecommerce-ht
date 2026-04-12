@@ -17,6 +17,7 @@ import {
   Tabs,
   Tag,
   Typography,
+  Spin,
 } from "antd";
 import { DeleteOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +30,6 @@ import {
   where,
   updateDoc,
   doc,
-  orderBy,
 } from "firebase/firestore";
 import dayjs from "dayjs";
 import type {
@@ -57,7 +57,14 @@ import {
   toggleCartPendingChecked,
   updateCartPendingQuantity,
 } from "../../services/cart.service";
-import { createVnpayPaymentUrl, sendCodOrderMail } from "@/services/payment.services";
+import {
+  createVnpayPaymentUrl,
+  sendCodOrderMail,
+  retryVnpayPayment,
+  getRetryOrderInfo,
+  retryVnpayPaymentFromOrder,
+} from "@/services/payment.services";
+import { formatRemainTime } from "@/utils/common";
 
 const { Text } = Typography;
 
@@ -123,6 +130,46 @@ const Component = () => {
   const [detailOrderOpen, setDetailOrderOpen] = useState(false);
   const [cancelOrderOpen, setCancelOrderOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<OrderDoc | null>(null);
+
+  const [retryPaymentOpen, setRetryPaymentOpen] = useState(false);
+  const [retryPaymentLoading, setRetryPaymentLoading] = useState(false);
+  const [retryPaymentSubmitting, setRetryPaymentSubmitting] = useState(false);
+  const [retryPaymentInfo, setRetryPaymentInfo] = useState<{
+    paymentId: string;
+    orderId: string;
+    remainingSeconds: number;
+    expired: boolean;
+    message?: string;
+  } | null>(null);
+
+  useEffect(() => {
+    if (!retryPaymentOpen || !retryPaymentInfo || retryPaymentInfo?.expired)
+      return;
+
+    const timer = window.setInterval(() => {
+      setRetryPaymentInfo((prev) => {
+        if (!prev) return prev;
+
+        const nextSeconds = Math.max(0, Number(prev.remainingSeconds || 0) - 1);
+
+        if (nextSeconds <= 0) {
+          return {
+            ...prev,
+            remainingSeconds: 0,
+            expired: true,
+            message: "Giao dịch đã hết hạn",
+          };
+        }
+
+        return {
+          ...prev,
+          remainingSeconds: nextSeconds,
+        };
+      });
+    }, 1000);
+
+    return () => window.clearInterval(timer);
+  }, [retryPaymentInfo, retryPaymentOpen]);
 
   const bootstrap = useCallback(async () => {
     try {
@@ -199,6 +246,79 @@ const Component = () => {
       setLoading(false);
     }
   }, [form, navigate]);
+
+  const handleOpenRetryPayment = useCallback(
+    async (order: OrderDoc) => {
+      try {
+        if (!order?.id) {
+          toast.error("Không tìm thấy mã đơn hàng");
+          return;
+        }
+
+        setRetryPaymentLoading(true);
+        setRetryPaymentOpen(true);
+        setRetryPaymentInfo(null);
+
+        const data = await getRetryOrderInfo(order.id);
+
+        setRetryPaymentInfo({
+          paymentId: "",
+          orderId: String(data.orderId || order.id),
+          remainingSeconds: Number(data.remainingSeconds || 0),
+          expired: Boolean(data.expired),
+          message: String(data.message || ""),
+        });
+
+        if (data.expired) {
+          toast.warning(data.message || "Đơn hàng đã hết hạn");
+          await bootstrap();
+        }
+      } catch (error: any) {
+        console.error(error);
+        toast.error(
+          error?.response?.data?.message ||
+            "Không lấy được thông tin thanh toán lại",
+        );
+        setRetryPaymentOpen(false);
+      } finally {
+        setRetryPaymentLoading(false);
+      }
+    },
+    [bootstrap],
+  );
+
+  const handleRetryPaymentNow = useCallback(async () => {
+    try {
+      if (!retryPaymentInfo?.orderId) return;
+
+      if (
+        retryPaymentInfo?.expired ||
+        Number(retryPaymentInfo.remainingSeconds || 0) <= 0
+      ) {
+        toast.warning("Giao dịch đã hết hạn, đơn hàng sẽ bị hủy");
+        await bootstrap();
+        return;
+      }
+
+      setRetryPaymentSubmitting(true);
+
+      const data = await retryVnpayPaymentFromOrder(retryPaymentInfo.orderId);
+
+      if (!data?.paymentUrl) {
+        toast.error("Không tạo được link thanh toán lại");
+        return;
+      }
+
+      window.location.href = data.paymentUrl;
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error?.response?.data?.message || "Thanh toán lại thất bại");
+      setRetryPaymentOpen(false);
+      await bootstrap();
+    } finally {
+      setRetryPaymentSubmitting(false);
+    }
+  }, [bootstrap, retryPaymentInfo]);
 
   useEffect(() => {
     bootstrap();
@@ -1031,19 +1151,41 @@ const Component = () => {
     },
     {
       title: "Thao tác",
-      width: 220,
-      render: (_: unknown, record: OrderDoc) => (
-        <Space>
-          <Button size="small" onClick={() => openOrderDetail(record)}>
-            Chi tiết
-          </Button>
-          {canCancelOrder(record.status) ? (
-            <Button danger size="small" onClick={() => openCancelOrder(record)}>
-              Huỷ đơn
+      width: 320,
+      render: (_: unknown, record: OrderDoc) => {
+        const canRetryPayment =
+          record.typePayment === "BANK_TRANSFER" &&
+          record.statusPayment !== "PAID" &&
+          record.status !== "CANCELLED";
+
+        return (
+          <Space wrap>
+            <Button size="small" onClick={() => openOrderDetail(record)}>
+              Chi tiết
             </Button>
-          ) : null}
-        </Space>
-      ),
+
+            {canRetryPayment ? (
+              <Button
+                size="small"
+                type="primary"
+                onClick={() => handleOpenRetryPayment(record)}
+              >
+                Thanh toán lại
+              </Button>
+            ) : null}
+
+            {canCancelOrder(record.status) ? (
+              <Button
+                danger
+                size="small"
+                onClick={() => openCancelOrder(record)}
+              >
+                Huỷ đơn
+              </Button>
+            ) : null}
+          </Space>
+        );
+      },
     },
   ];
 
@@ -1435,6 +1577,81 @@ const Component = () => {
             <Button onClick={() => setPolicyOpen(false)}>Đóng</Button>
           </div>
         </div>
+      </Modal>
+
+      <Modal
+        title="Thanh toán lại đơn hàng"
+        open={retryPaymentOpen}
+        width={560}
+        footer={null}
+        destroyOnClose
+        onCancel={() => {
+          setRetryPaymentOpen(false);
+          setRetryPaymentInfo(null);
+        }}
+      >
+        {retryPaymentLoading ? (
+          <div className="flex min-h-[180px] items-center justify-center">
+            <Spin />
+          </div>
+        ) : retryPaymentInfo ? (
+          <div>
+            <div className="mb-16 rounded-radius-m bg-color-100 p-16">
+              <div className="mb-8">
+                <span className="font-medium">Mã đơn:</span>{" "}
+                {retryPaymentInfo.orderId}
+              </div>
+              <div className="mb-8">
+                <span className="font-medium">Mã thanh toán:</span>{" "}
+                {retryPaymentInfo.paymentId}
+              </div>
+              <div>
+                <span className="font-medium">Thời gian còn lại:</span>{" "}
+                {retryPaymentInfo?.expired
+                  ? "Đã hết hạn"
+                  : formatRemainTime(retryPaymentInfo.remainingSeconds)}
+              </div>
+            </div>
+
+            {retryPaymentInfo?.expired ? (
+              <div className="mb-16 rounded-radius-m border border-error-300 bg-error-50 p-16 text-error-600">
+                {retryPaymentInfo.message ||
+                  "Giao dịch đã quá 30 phút. Đơn hàng đã bị hủy."}
+              </div>
+            ) : (
+              <div className="mb-16 rounded-radius-m border border-primary-300 bg-primary-50 p-16">
+                <div className="font-medium text-color-900">
+                  Bạn vẫn có thể tiếp tục thanh toán đơn hàng này.
+                </div>
+                <div className="mt-4 text-13 text-color-700">
+                  Nếu quá 30 phút kể từ thời điểm tạo payment mà chưa thanh toán
+                  thành công, hệ thống sẽ tự hủy đơn.
+                </div>
+              </div>
+            )}
+
+            <div className="flex justify-end gap-12">
+              <Button
+                onClick={() => {
+                  setRetryPaymentOpen(false);
+                  setRetryPaymentInfo(null);
+                }}
+              >
+                Đóng
+              </Button>
+
+              {!retryPaymentInfo?.expired ? (
+                <Button
+                  type="primary"
+                  loading={retryPaymentSubmitting}
+                  onClick={handleRetryPaymentNow}
+                >
+                  Thanh toán ngay
+                </Button>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
       </Modal>
     </div>
   );

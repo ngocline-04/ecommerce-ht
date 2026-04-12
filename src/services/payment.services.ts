@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const VNPAY_API_BASE_URL =
   import.meta.env.VITE_VNPAY_API_BASE_URL || "http://localhost:5001";
 
@@ -67,3 +69,19 @@ export const sendCodOrderMail = async (payload: {
 
   return data;
 };
+
+
+export const getRetryOrderInfo = async (orderId: string) => {
+  const response = await axios.get(
+    `${VNPAY_API_BASE_URL}/api/vnpay/retry-order-info/${orderId}`,
+  );
+  return response.data;
+};
+
+export const retryVnpayPaymentFromOrder = async (orderId: string) => {
+  const response = await axios.post(
+    `${VNPAY_API_BASE_URL}/api/vnpay/retry-from-order/${orderId}`,
+  );
+  return response.data;
+};
+
