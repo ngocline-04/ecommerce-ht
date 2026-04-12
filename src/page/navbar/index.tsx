@@ -325,7 +325,7 @@ function LayoutSaving() {
 
             {currentUser ? (
               <>
-                <div className="flex items-center gap-8 rounded-radius-m bg-color-100 px-12 py-8">
+                <div onClick={()=> navigate('/account')} className="flex items-center gap-8 rounded-radius-m bg-color-100 px-12 py-8">
                   <Avatar size="small" icon={<UserOutlined />} />
                   <span className="text-14">{displayName}</span>
                 </div>

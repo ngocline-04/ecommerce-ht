@@ -9,9 +9,9 @@ import ListProductPage from "@/page/products-page";
 import CartPage from "@/page/cart-page";
 import CheckoutPage from "@/page/payment-page";
 import ProductDetailPage from "@/page/product-detail";
+import ProfilePage from "@/page/account-page";
 
 // TODO: thay bằng page thật của bạn
-const ProfilePage = () => <div>Thông tin cá nhân</div>;
 
 const ProtectedRoute = ({
   element,
@@ -91,6 +91,16 @@ export const router = createBrowserRouter(
             <ProtectedRoute
               element={<ProductDetailPage />}
               titleId="Chi tiết sản phẩm"
+            />
+          ),
+          errorElement: <ErrorPage isLogout={false} />,
+        },
+        {
+          path: "/account",
+          element: (
+            <ProtectedRoute
+              element={<ProfilePage />}
+              titleId="Quản lý thông tin cá nhân"
             />
           ),
           errorElement: <ErrorPage isLogout={false} />,
