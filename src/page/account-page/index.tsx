@@ -8,6 +8,7 @@ import {
   Divider,
   Form,
   Input,
+  Modal,
   Radio,
   Row,
   Select,
@@ -27,22 +28,47 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
-import { updateProfile } from "firebase/auth";
+import {
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  sendPasswordResetEmail,
+  updatePassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "@/App";
+import addressData from "@/assets/json/address.json";
 
 type GenderType = "MALE" | "FEMALE" | "OTHER";
+
+type AddressMappingRow = {
+  city_id_old?: number;
+  city_name_old?: string;
+  district_id_old?: number;
+  district_name_old?: string;
+  ward_id_old?: number;
+  ward_name_old?: string;
+  city_id_new: number;
+  city_name_new: string;
+  ward_id_new: number;
+  ward_new_name: string;
+};
 
 type PersonalProfileForm = {
   fullName: string;
   phoneNumber: string;
   dateOfBirth?: dayjs.Dayjs | null;
   gender: GenderType;
-  address: string;
-  province: string;
-  district: string;
-  ward: string;
+  cityIdNew?: number;
+  wardIdNew?: number;
+  addressLine: string;
   bio: string;
   avatar: string;
+};
+
+type ChangePasswordForm = {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
 };
 
 const PROFILE_STORAGE_KEY = "personal_profile_screen_data";
@@ -52,10 +78,9 @@ const DEFAULT_PROFILE: PersonalProfileForm = {
   phoneNumber: "",
   dateOfBirth: null,
   gender: "OTHER",
-  address: "",
-  province: "",
-  district: "",
-  ward: "",
+  cityIdNew: undefined,
+  wardIdNew: undefined,
+  addressLine: "",
   bio: "",
   avatar: "",
 };
@@ -66,64 +91,17 @@ const GENDER_OPTIONS = [
   { label: "Khác", value: "OTHER" },
 ];
 
-const PROVINCE_OPTIONS = [
-  { label: "Hà Nội", value: "HN" },
-  { label: "TP. Hồ Chí Minh", value: "HCM" },
-  { label: "Đà Nẵng", value: "DN" },
-  { label: "Hải Phòng", value: "HP" },
-  { label: "Cần Thơ", value: "CT" },
-];
+const normalizeText = (value?: string) => String(value || "").trim();
 
-const DISTRICT_OPTIONS: Record<string, { label: string; value: string }[]> = {
-  HN: [
-    { label: "Ba Đình", value: "BADINH" },
-    { label: "Cầu Giấy", value: "CAUGIAY" },
-    { label: "Nam Từ Liêm", value: "NAMTULIEM" },
-  ],
-  HCM: [
-    { label: "Quận 1", value: "Q1" },
-    { label: "Quận 7", value: "Q7" },
-    { label: "Thủ Đức", value: "THUDUC" },
-  ],
-  DN: [
-    { label: "Hải Châu", value: "HAICHAU" },
-    { label: "Thanh Khê", value: "THANHKHE" },
-  ],
-  HP: [
-    { label: "Ngô Quyền", value: "NGOQUYEN" },
-    { label: "Lê Chân", value: "LECHAN" },
-  ],
-  CT: [
-    { label: "Ninh Kiều", value: "NINHKIEU" },
-    { label: "Bình Thủy", value: "BINHTHUY" },
-  ],
-};
-
-const WARD_OPTIONS: Record<string, { label: string; value: string }[]> = {
-  BADINH: [
-    { label: "Điện Biên", value: "DIENBIEN" },
-    { label: "Kim Mã", value: "KIMMA" },
-  ],
-  CAUGIAY: [
-    { label: "Dịch Vọng", value: "DICHVONG" },
-    { label: "Nghĩa Đô", value: "NGHIADO" },
-  ],
-  NAMTULIEM: [
-    { label: "Mỹ Đình 1", value: "MYDINH1" },
-    { label: "Mỹ Đình 2", value: "MYDINH2" },
-  ],
-  Q1: [
-    { label: "Bến Nghé", value: "BENGHE" },
-    { label: "Bến Thành", value: "BENTHANH" },
-  ],
-  Q7: [
-    { label: "Tân Phú", value: "TANPHU" },
-    { label: "Tân Hưng", value: "TANHUNG" },
-  ],
-  THUDUC: [
-    { label: "Hiệp Bình Chánh", value: "HIEPBINHCHANH" },
-    { label: "Linh Tây", value: "LINHTAY" },
-  ],
+const dedupeBy = <T,>(items: T[], keyGetter: (item: T) => string | number) => {
+  const map = new Map<string | number, T>();
+  items.forEach((item) => {
+    const key = keyGetter(item);
+    if (!map.has(key)) {
+      map.set(key, item);
+    }
+  });
+  return Array.from(map.values());
 };
 
 const readProfileFromStorage = (): PersonalProfileForm => {
@@ -138,10 +116,11 @@ const readProfileFromStorage = (): PersonalProfileForm => {
       phoneNumber: parsed?.phoneNumber || "",
       dateOfBirth: parsed?.dateOfBirth ? dayjs(parsed.dateOfBirth) : null,
       gender: parsed?.gender || "OTHER",
-      address: parsed?.address || "",
-      province: parsed?.province || "",
-      district: parsed?.district || "",
-      ward: parsed?.ward || "",
+      cityIdNew:
+        typeof parsed?.cityIdNew === "number" ? parsed.cityIdNew : undefined,
+      wardIdNew:
+        typeof parsed?.wardIdNew === "number" ? parsed.wardIdNew : undefined,
+      addressLine: parsed?.addressLine || "",
       bio: parsed?.bio || "",
       avatar: parsed?.avatar || "",
     };
@@ -170,10 +149,16 @@ const getBase64 = (file: File) =>
 
 const Component = () => {
   const [form] = Form.useForm<PersonalProfileForm>();
+  const [passwordForm] = Form.useForm<ChangePasswordForm>();
+
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [avatarUploading, setAvatarUploading] = useState(false);
   const [avatarFileList, setAvatarFileList] = useState<UploadFile[]>([]);
+
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+  const [changingPassword, setChangingPassword] = useState(false);
+  const [sendingResetMail, setSendingResetMail] = useState(false);
 
   const currentUser = auth.currentUser;
 
@@ -186,21 +171,63 @@ const Component = () => {
       photoURL: currentUser?.photoURL || "",
       createdAt: currentUser?.metadata?.creationTime || "",
       lastSignInAt: currentUser?.metadata?.lastSignInTime || "",
-      provider:
-        currentUser?.providerData?.[0]?.providerId || "password",
+      provider: currentUser?.providerData?.[0]?.providerId || "password",
     };
   }, [currentUser]);
 
-  const province = Form.useWatch("province", form);
-  const district = Form.useWatch("district", form);
+  const addressRows = useMemo<AddressMappingRow[]>(() => {
+    return (Array.isArray(addressData) ? addressData : []) as AddressMappingRow[];
+  }, []);
 
-  const districtOptions = useMemo(() => {
-    return DISTRICT_OPTIONS[province || ""] || [];
-  }, [province]);
+  const cityOptions = useMemo(() => {
+    const uniqueCities = dedupeBy(
+      addressRows
+        .filter((item) => item.city_id_new && normalizeText(item.city_name_new))
+        .map((item) => ({
+          value: item.city_id_new,
+          label: normalizeText(item.city_name_new),
+        })),
+      (item) => item.value,
+    );
+
+    return uniqueCities.sort((a, b) => a.label.localeCompare(b.label, "vi"));
+  }, [addressRows]);
+
+  const selectedCityId = Form.useWatch("cityIdNew", form);
 
   const wardOptions = useMemo(() => {
-    return WARD_OPTIONS[district || ""] || [];
-  }, [district]);
+    if (!selectedCityId) return [];
+
+    const wards = dedupeBy(
+      addressRows
+        .filter((item) => Number(item.city_id_new) === Number(selectedCityId))
+        .map((item) => ({
+          value: item.ward_id_new,
+          label: normalizeText(item.ward_new_name),
+        }))
+        .filter((item) => item.value && item.label),
+      (item) => item.value,
+    );
+
+    return wards.sort((a, b) => a.label.localeCompare(b.label, "vi"));
+  }, [addressRows, selectedCityId]);
+
+  const selectedWardId = Form.useWatch("wardIdNew", form);
+
+  const selectedCityLabel = useMemo(() => {
+    return cityOptions.find((item) => item.value === selectedCityId)?.label || "";
+  }, [cityOptions, selectedCityId]);
+
+  const selectedWardLabel = useMemo(() => {
+    return wardOptions.find((item) => item.value === selectedWardId)?.label || "";
+  }, [selectedWardId, wardOptions]);
+
+  const fullAddressPreview = useMemo(() => {
+    const addressLine = normalizeText(form.getFieldValue("addressLine"));
+    return [addressLine, selectedWardLabel, selectedCityLabel]
+      .filter(Boolean)
+      .join(", ");
+  }, [form, selectedCityLabel, selectedWardLabel]);
 
   useEffect(() => {
     const bootstrap = async () => {
@@ -214,13 +241,26 @@ const Component = () => {
           phoneNumber: localProfile.phoneNumber || "",
           dateOfBirth: localProfile.dateOfBirth || null,
           gender: localProfile.gender || "OTHER",
-          address: localProfile.address || "",
-          province: localProfile.province || "",
-          district: localProfile.district || "",
-          ward: localProfile.ward || "",
+          cityIdNew: localProfile.cityIdNew,
+          wardIdNew: localProfile.wardIdNew,
+          addressLine: localProfile.addressLine || "",
           bio: localProfile.bio || "",
           avatar: localProfile.avatar || authInfo.photoURL || "",
         });
+
+        if (localProfile.avatar || authInfo.photoURL) {
+          const avatarUrl = localProfile.avatar || authInfo.photoURL || "";
+          if (avatarUrl) {
+            setAvatarFileList([
+              {
+                uid: "initial-avatar",
+                name: "avatar",
+                status: "done",
+                url: avatarUrl,
+              },
+            ]);
+          }
+        }
       } finally {
         setLoading(false);
       }
@@ -229,16 +269,9 @@ const Component = () => {
     bootstrap();
   }, [authInfo.displayName, authInfo.photoURL, form]);
 
-  const handleProvinceChange = () => {
+  const handleCityChange = () => {
     form.setFieldsValue({
-      district: "",
-      ward: "",
-    });
-  };
-
-  const handleDistrictChange = () => {
-    form.setFieldsValue({
-      ward: "",
+      wardIdNew: undefined,
     });
   };
 
@@ -279,8 +312,10 @@ const Component = () => {
 
       if (auth.currentUser) {
         const shouldUpdateAuthProfile =
-          (values.fullName || "") !== (auth.currentUser.displayName || "") ||
-          (values.avatar || "") !== (auth.currentUser.photoURL || "");
+          normalizeText(values.fullName) !==
+            normalizeText(auth.currentUser.displayName || "") ||
+          normalizeText(values.avatar) !==
+            normalizeText(auth.currentUser.photoURL || "");
 
         if (shouldUpdateAuthProfile) {
           await updateProfile(auth.currentUser, {
@@ -299,11 +334,114 @@ const Component = () => {
     }
   };
 
+  const openChangePasswordModal = () => {
+    passwordForm.resetFields();
+    setPasswordModalOpen(true);
+  };
+
+  const handleChangePassword = async (values: ChangePasswordForm) => {
+    try {
+      if (!auth.currentUser) {
+        message.error("Bạn chưa đăng nhập");
+        return;
+      }
+
+      if (!auth.currentUser.email) {
+        message.error("Tài khoản hiện tại không có email để xác thực");
+        return;
+      }
+
+      setChangingPassword(true);
+
+      const credential = EmailAuthProvider.credential(
+        auth.currentUser.email,
+        values.currentPassword,
+      );
+
+      await reauthenticateWithCredential(auth.currentUser, credential);
+      await updatePassword(auth.currentUser, values.newPassword);
+
+      message.success("Đổi mật khẩu thành công");
+      passwordForm.resetFields();
+      setPasswordModalOpen(false);
+    } catch (error: any) {
+      console.error(error);
+
+      if (error?.code === "auth/wrong-password") {
+        message.error("Mật khẩu hiện tại không đúng");
+        return;
+      }
+
+      if (error?.code === "auth/weak-password") {
+        message.error("Mật khẩu mới quá yếu");
+        return;
+      }
+
+      if (error?.code === "auth/requires-recent-login") {
+        message.error(
+          "Phiên đăng nhập đã cũ. Vui lòng đăng nhập lại hoặc dùng gửi email đặt lại mật khẩu.",
+        );
+        return;
+      }
+
+      if (error?.code === "auth/too-many-requests") {
+        message.error("Bạn thao tác quá nhiều lần. Vui lòng thử lại sau");
+        return;
+      }
+
+      message.error("Đổi mật khẩu thất bại");
+    } finally {
+      setChangingPassword(false);
+    }
+  };
+
+  const handleSendResetPasswordEmail = async () => {
+    try {
+      if (!auth.currentUser?.email) {
+        message.error("Không tìm thấy email tài khoản");
+        return;
+      }
+
+      setSendingResetMail(true);
+
+      auth.languageCode = "vi";
+
+      await sendPasswordResetEmail(auth, auth.currentUser.email, {
+        url: `${window.location.origin}/login`,
+        handleCodeInApp: false,
+      });
+
+      message.success(
+        "Đã gửi email đặt lại mật khẩu. Vui lòng kiểm tra hộp thư và cả mục Spam/Junk.",
+      );
+    } catch (error: any) {
+      console.error(error);
+
+      if (error?.code === "auth/too-many-requests") {
+        message.error("Bạn thao tác quá nhiều lần. Vui lòng thử lại sau");
+        return;
+      }
+
+      message.error("Gửi email đặt lại mật khẩu thất bại");
+    } finally {
+      setSendingResetMail(false);
+    }
+  };
+
   if (!currentUser && !loading) {
     return (
       <div className="block-content">
         <Card className="rounded-radius-xl">
-          <Empty description="Bạn cần đăng nhập để xem thông tin cá nhân" />
+          <div className="flex min-h-[320px] items-center justify-center">
+            <div className="text-center">
+              <div className="mb-8 text-18 font-semibold">
+                Bạn chưa đăng nhập
+              </div>
+              <div className="text-14 text-color-700">
+                Vui lòng đăng nhập để xem và cập nhật thông tin cá nhân
+              </div>
+            </div>
+          </div>
         </Card>
       </div>
     );
@@ -329,7 +467,7 @@ const Component = () => {
             Quản lý thông tin cá nhân
           </div>
           <div className="text-14 leading-22 text-common-1000/90">
-            Cập nhật hồ sơ cá nhân, ảnh đại diện và thông tin liên hệ của bạn
+            Cập nhật hồ sơ cá nhân, ảnh đại diện và địa chỉ liên hệ của bạn
           </div>
         </div>
       </div>
@@ -345,7 +483,9 @@ const Component = () => {
               />
 
               <div className="mt-16 text-20 font-semibold text-color-900">
-                {form.getFieldValue("fullName") || authInfo.displayName || "Người dùng"}
+                {form.getFieldValue("fullName") ||
+                  authInfo.displayName ||
+                  "Người dùng"}
               </div>
 
               <div className="mt-4 text-14 text-color-700">
@@ -355,7 +495,9 @@ const Component = () => {
               <div className="mt-12 flex flex-wrap justify-center gap-8">
                 <Tag color="blue">{authInfo.provider}</Tag>
                 <Tag color={authInfo.emailVerified ? "green" : "red"}>
-                  {authInfo.emailVerified ? "Đã xác thực email" : "Chưa xác thực email"}
+                  {authInfo.emailVerified
+                    ? "Đã xác thực email"
+                    : "Chưa xác thực email"}
                 </Tag>
               </div>
 
@@ -366,10 +508,7 @@ const Component = () => {
                 showUploadList={false}
                 beforeUpload={handleUploadAvatar}
               >
-                <Button
-                  icon={<CameraOutlined />}
-                  loading={avatarUploading}
-                >
+                <Button icon={<CameraOutlined />} loading={avatarUploading}>
                   Đổi ảnh đại diện
                 </Button>
               </Upload>
@@ -385,17 +524,30 @@ const Component = () => {
                 </div>
 
                 <div className="mb-8 text-13 text-color-700">
-                  <span className="font-medium text-color-900">Ngày tạo TK:</span>{" "}
+                  <span className="font-medium text-color-900">
+                    Ngày tạo TK:
+                  </span>{" "}
                   {authInfo.createdAt
                     ? dayjs(authInfo.createdAt).format("DD/MM/YYYY HH:mm")
                     : "-"}
                 </div>
 
                 <div className="text-13 text-color-700">
-                  <span className="font-medium text-color-900">Đăng nhập gần nhất:</span>{" "}
+                  <span className="font-medium text-color-900">
+                    Đăng nhập gần nhất:
+                  </span>{" "}
                   {authInfo.lastSignInAt
                     ? dayjs(authInfo.lastSignInAt).format("DD/MM/YYYY HH:mm")
                     : "-"}
+                </div>
+              </div>
+
+              <div className="mt-16 w-full rounded-radius-l bg-color-100 p-16">
+                <div className="mb-8 text-13 font-medium text-color-900">
+                  Xem nhanh địa chỉ
+                </div>
+                <div className="text-13 leading-20 text-color-700">
+                  {fullAddressPreview || "Chưa cập nhật địa chỉ"}
                 </div>
               </div>
             </div>
@@ -408,7 +560,9 @@ const Component = () => {
             title="Thông tin hồ sơ"
             extra={
               <Space>
-                <Button icon={<LockOutlined />}>Đổi mật khẩu</Button>
+                <Button icon={<LockOutlined />} onClick={openChangePasswordModal}>
+                  Đổi mật khẩu
+                </Button>
                 <Button
                   type="primary"
                   icon={<SaveOutlined />}
@@ -461,7 +615,10 @@ const Component = () => {
                     label="Số điện thoại"
                     name="phoneNumber"
                     rules={[
-                      { required: true, message: "Vui lòng nhập số điện thoại" },
+                      {
+                        required: true,
+                        message: "Vui lòng nhập số điện thoại",
+                      },
                       {
                         pattern: /^(0|\+84)\d{8,10}$/,
                         message: "Số điện thoại không đúng định dạng",
@@ -493,51 +650,68 @@ const Component = () => {
                   </Form.Item>
                 </Col>
 
+                <Col xs={24}>
+                  <Divider orientation="left">Địa chỉ liên hệ</Divider>
+                </Col>
+
                 <Col xs={24} md={12}>
-                  <Form.Item label="Tỉnh / Thành phố" name="province">
+                  <Form.Item
+                    label="Tỉnh / Thành phố"
+                    name="cityIdNew"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Vui lòng chọn tỉnh / thành phố",
+                      },
+                    ]}
+                  >
                     <Select
                       size="large"
-                      options={PROVINCE_OPTIONS}
+                      options={cityOptions}
                       placeholder="Chọn tỉnh / thành phố"
-                      onChange={handleProvinceChange}
+                      onChange={handleCityChange}
+                      showSearch
+                      optionFilterProp="label"
                     />
                   </Form.Item>
                 </Col>
 
                 <Col xs={24} md={12}>
-                  <Form.Item label="Quận / Huyện" name="district">
-                    <Select
-                      size="large"
-                      options={districtOptions}
-                      placeholder="Chọn quận / huyện"
-                      onChange={handleDistrictChange}
-                      disabled={!province}
-                    />
-                  </Form.Item>
-                </Col>
-
-                <Col xs={24} md={12}>
-                  <Form.Item label="Phường / Xã" name="ward">
+                  <Form.Item
+                    label="Phường / Xã"
+                    name="wardIdNew"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Vui lòng chọn phường / xã",
+                      },
+                    ]}
+                  >
                     <Select
                       size="large"
                       options={wardOptions}
                       placeholder="Chọn phường / xã"
-                      disabled={!district}
+                      disabled={!selectedCityId}
+                      showSearch
+                      optionFilterProp="label"
                     />
                   </Form.Item>
                 </Col>
 
                 <Col xs={24}>
                   <Form.Item
-                    label="Địa chỉ chi tiết"
-                    name="address"
+                    label="Số nhà / Tên đường / Tòa nhà"
+                    name="addressLine"
                     rules={[
-                      { required: true, message: "Vui lòng nhập địa chỉ chi tiết" },
+                      {
+                        required: true,
+                        message: "Vui lòng nhập địa chỉ chi tiết",
+                      },
                     ]}
                   >
                     <Input
                       size="large"
-                      placeholder="Số nhà, tên đường, tòa nhà..."
+                      placeholder="Ví dụ: Số 12, ngõ 8, đường Láng"
                     />
                   </Form.Item>
                 </Col>
@@ -583,7 +757,9 @@ const Component = () => {
                       size="large"
                       value={
                         authInfo.createdAt
-                          ? dayjs(authInfo.createdAt).format("DD/MM/YYYY HH:mm")
+                          ? dayjs(authInfo.createdAt).format(
+                              "DD/MM/YYYY HH:mm",
+                            )
                           : ""
                       }
                       disabled
@@ -597,7 +773,9 @@ const Component = () => {
                       size="large"
                       value={
                         authInfo.lastSignInAt
-                          ? dayjs(authInfo.lastSignInAt).format("DD/MM/YYYY HH:mm")
+                          ? dayjs(authInfo.lastSignInAt).format(
+                              "DD/MM/YYYY HH:mm",
+                            )
                           : ""
                       }
                       disabled
@@ -615,6 +793,113 @@ const Component = () => {
           </Card>
         </Col>
       </Row>
+
+      <Modal
+        title="Đổi mật khẩu"
+        open={passwordModalOpen}
+        onCancel={() => setPasswordModalOpen(false)}
+        footer={null}
+        destroyOnClose
+        width={560}
+      >
+        <div className="mb-16 rounded-radius-l bg-color-100 p-16">
+          <div className="mb-4 text-14 font-medium text-color-900">
+            Email tài khoản
+          </div>
+          <div className="text-14 text-color-700">
+            {authInfo.email || "Không có email"}
+          </div>
+        </div>
+
+        <Form<ChangePasswordForm>
+          form={passwordForm}
+          layout="vertical"
+          autoComplete="off"
+          onFinish={handleChangePassword}
+        >
+          <Form.Item
+            label="Mật khẩu hiện tại"
+            name="currentPassword"
+            rules={[
+              { required: true, message: "Vui lòng nhập mật khẩu hiện tại" },
+            ]}
+          >
+            <Input.Password
+              size="large"
+              placeholder="Nhập mật khẩu hiện tại"
+            />
+          </Form.Item>
+
+          <Form.Item
+            label="Mật khẩu mới"
+            name="newPassword"
+            rules={[
+              { required: true, message: "Vui lòng nhập mật khẩu mới" },
+              { min: 6, message: "Mật khẩu mới tối thiểu 6 ký tự" },
+            ]}
+          >
+            <Input.Password
+              size="large"
+              placeholder="Nhập mật khẩu mới"
+            />
+          </Form.Item>
+
+          <Form.Item
+            label="Xác nhận mật khẩu mới"
+            name="confirmPassword"
+            dependencies={["newPassword"]}
+            rules={[
+              { required: true, message: "Vui lòng xác nhận mật khẩu mới" },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("newPassword") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error("Mật khẩu xác nhận không khớp"),
+                  );
+                },
+              }),
+            ]}
+          >
+            <Input.Password
+              size="large"
+              placeholder="Nhập lại mật khẩu mới"
+            />
+          </Form.Item>
+
+          <div className="mb-16 rounded-radius-l border border-color-300 p-16">
+            <div className="mb-8 text-14 font-medium text-color-900">
+              Xác nhận qua mail
+            </div>
+            <div className="mb-12 text-13 leading-20 text-color-700">
+              Nếu bạn không muốn đổi trực tiếp, có thể gửi email đặt lại mật
+              khẩu qua Firebase.
+            </div>
+
+            <Button
+              block
+              icon={<MailOutlined />}
+              loading={sendingResetMail}
+              onClick={handleSendResetPasswordEmail}
+            >
+              Gửi email đặt lại mật khẩu
+            </Button>
+          </div>
+
+          <div className="flex justify-end gap-12">
+            <Button onClick={() => setPasswordModalOpen(false)}>Đóng</Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              icon={<LockOutlined />}
+              loading={changingPassword}
+            >
+              Cập nhật mật khẩu
+            </Button>
+          </div>
+        </Form>
+      </Modal>
     </div>
   );
 };
