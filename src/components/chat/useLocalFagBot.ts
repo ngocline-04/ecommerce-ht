@@ -54,6 +54,133 @@ const normalizeText = (value: string) => {
     .trim();
 };
 
+const SMALL_TALK_PATTERNS = {
+  thanks: [
+    "cam on",
+    "cảm ơn",
+    "thank",
+    "thanks",
+    "thank you",
+    "tks",
+    "thx",
+    "ok cam on",
+    "ok cảm ơn",
+    "da cam on",
+    "dạ cảm ơn",
+  ],
+  greeting: [
+    "xin chao",
+    "xin chào",
+    "chao shop",
+    "chào shop",
+    "hello",
+    "hi",
+    "alo",
+    "shop oi",
+    "shop ơi",
+  ],
+  farewell: [
+    "tam biet",
+    "tạm biệt",
+    "bye",
+    "goodbye",
+    "hen gap lai",
+    "hẹn gặp lại",
+  ],
+  confirm: [
+    "ok",
+    "oke",
+    "oki",
+    "okie",
+    "vang",
+    "vâng",
+    "da",
+    "dạ",
+    "uh",
+    "ừ",
+    "duoc",
+    "được",
+    "roi",
+    "rồi",
+  ],
+};
+
+const GENERIC_TOKENS = new Set([
+  "co",
+  "khong",
+  "bao",
+  "gia",
+  "nhieu",
+  "loai",
+  "nao",
+  "mau",
+  "dep",
+  "tot",
+  "tu",
+  "van",
+  "the",
+  "sao",
+  "ra",
+  "dat",
+  "bao hanh",
+  "phu",
+  "hop",
+  "nha",
+  "nho",
+  "may",
+  "voi",
+  "sen",
+  "bon",
+  "tuong",
+  "am",
+]);
+
+const includesAnyPattern = (normalizedTextValue: string, patterns: string[]) => {
+  return patterns.some((item) => normalizedTextValue.includes(normalizeText(item)));
+};
+
+const detectSmallTalkIntent = (message: string) => {
+  const normalized = normalizeText(message);
+
+  if (!normalized) return null;
+
+  if (includesAnyPattern(normalized, SMALL_TALK_PATTERNS.thanks)) {
+    return "thanks";
+  }
+
+  if (includesAnyPattern(normalized, SMALL_TALK_PATTERNS.greeting)) {
+    return "greeting";
+  }
+
+  if (includesAnyPattern(normalized, SMALL_TALK_PATTERNS.farewell)) {
+    return "farewell";
+  }
+
+  if (
+    includesAnyPattern(normalized, SMALL_TALK_PATTERNS.confirm) &&
+    normalized.split(" ").length <= 3
+  ) {
+    return "confirm";
+  }
+
+  return null;
+};
+
+const getSmallTalkReply = (intent: string) => {
+  switch (intent) {
+    case "thanks":
+      return "Dạ em cảm ơn anh/chị ạ. Nếu mình cần em tư vấn thêm sản phẩm nào thì cứ nhắn em nhé.";
+    case "greeting":
+      return "Dạ em chào anh/chị ạ 👋 Anh/chị đang quan tâm sản phẩm nào để em hỗ trợ nhanh nhé.";
+    case "farewell":
+      return "Dạ em cảm ơn anh/chị ạ. Khi nào cần hỗ trợ thêm mình cứ nhắn lại cho em nhé.";
+    case "confirm":
+      return "Dạ vâng ạ. Anh/chị cần em tư vấn tiếp sản phẩm nào thì cứ nhắn em nhé.";
+    default:
+      return "Dạ em sẵn sàng hỗ trợ anh/chị ạ.";
+  }
+};
+
 const extractBudget = (message: string) => {
   const normalized = normalizeText(message);
 
@@ -136,7 +263,10 @@ const isSizeOnlyMessage = (message: string) => {
 const shouldSearchProducts = (
   customerText: string,
   matchedFaq: FaqItem | null,
+  smallTalkIntent: string | null,
 ) => {
+  if (smallTalkIntent) return false;
+
   const normalized = normalizeText(customerText);
 
   return (
@@ -152,6 +282,8 @@ const shouldSearchProducts = (
     normalized.includes("bon cau") ||
     normalized.includes("guong") ||
     normalized.includes("phong tam") ||
+    normalized.includes("voi bep") ||
+    normalized.includes("sen am tuong") ||
     isBudgetOnlyMessage(customerText) ||
     isSizeOnlyMessage(customerText)
   );
@@ -167,13 +299,22 @@ const scoreFaqItem = (message: string, faq: FaqItem) => {
     if (!normalizedKeyword) continue;
 
     if (normalizedMessage.includes(normalizedKeyword)) {
-      score += 3;
+      const tokenCount = normalizedKeyword.split(" ").filter(Boolean).length;
+
+      if (tokenCount >= 3) {
+        score += 8;
+      } else if (tokenCount === 2) {
+        score += 5;
+      } else if (!GENERIC_TOKENS.has(normalizedKeyword)) {
+        score += 2;
+      }
     }
 
     const tokens = normalizedKeyword.split(" ").filter(Boolean);
 
     for (const token of tokens) {
       if (token.length < 2) continue;
+      if (GENERIC_TOKENS.has(token)) continue;
 
       if (normalizedMessage.includes(token)) {
         score += 1;
@@ -184,15 +325,15 @@ const scoreFaqItem = (message: string, faq: FaqItem) => {
   const normalizedQuestion = normalizeText(faq.question);
 
   if (normalizedQuestion && normalizedMessage.includes(normalizedQuestion)) {
-    score += 4;
+    score += 10;
   }
 
   if (faq.key.includes("budget") && isBudgetOnlyMessage(message)) {
-    score += 4;
+    score += 6;
   }
 
   if (faq.key.includes("size") && isSizeOnlyMessage(message)) {
-    score += 4;
+    score += 6;
   }
 
   score += faq.priority || 0;
@@ -213,7 +354,11 @@ const findBestFaq = (message: string, faqList: FaqItem[]) => {
     }
   }
 
-  if (!bestItem || bestScore < 4) {
+  const normalized = normalizeText(message);
+  const wordCount = normalized ? normalized.split(" ").length : 0;
+  const minScore = wordCount <= 2 ? 10 : 8;
+
+  if (!bestItem || bestScore < minScore) {
     return null;
   }
 
@@ -250,6 +395,16 @@ export const useLocalFaqBot = ({
 }: UseLocalFaqBotParams) => {
   const getBotReply = async (customerText: string): Promise<BotReplyResult> => {
     const trimmed = customerText.trim();
+    const smallTalkIntent = detectSmallTalkIntent(trimmed);
+
+    if (smallTalkIntent) {
+      return {
+        matchedFaqKey: `smalltalk_${smallTalkIntent}`,
+        replyText: getSmallTalkReply(smallTalkIntent),
+        products: [],
+      };
+    }
+
     const matchedFaq = findBestFaq(trimmed, FAQ_DATA);
 
     const replyText = matchedFaq
@@ -260,7 +415,7 @@ export const useLocalFaqBot = ({
 
     if (matchedFaq?.productIds && matchedFaq.productIds.length > 0) {
       products = await searchProductsByIds(matchedFaq.productIds);
-    } else if (shouldSearchProducts(trimmed, matchedFaq)) {
+    } else if (shouldSearchProducts(trimmed, matchedFaq, smallTalkIntent)) {
       products = await searchProductsByMessage(trimmed);
     }
 

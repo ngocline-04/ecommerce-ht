@@ -8,9 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { DialogView } from "./components/dialog";
 import { ToastView } from "./components/toast";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
+import {  getFirestore } from "firebase/firestore";
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
+import { getPerformance } from "firebase/performance";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBOpDK7WKkfK6rABkuVvLMqMgLAJXmtQII",
@@ -26,6 +27,11 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
+const perf = getPerformance(app);
+
+perf.app.automaticDataCollectionEnabled = true;
+perf.dataCollectionEnabled = true;
+perf.instrumentationEnabled = true;
 
 const App: React.FC = () => {
   const [isAuthReady, setIsAuthReady] = useState(false);

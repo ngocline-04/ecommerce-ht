@@ -12,6 +12,7 @@ import {
   setDoc,
   updateDoc,
   where,
+  writeBatch,
   type Unsubscribe,
 } from "firebase/firestore";
 import { db } from "@/App";
@@ -60,6 +61,14 @@ export const getConversationQueryIdentity = (
     customerKey,
     guestSessionId: currentUserProfile?.id ? null : customerKey,
     customerUserId: currentUserProfile?.id ?? null,
+    customerId: currentUserProfile?.id ?? null,
+  };
+};
+
+const mapConversationDoc = (docSnap: any): ConversationRecord => {
+  return {
+    id: docSnap.id,
+    ...(docSnap.data() as Omit<ConversationRecord, "id">),
   };
 };
 
@@ -72,34 +81,45 @@ export const findOpenConversationByCustomerKey = async (
     collection(db, "conversations"),
     where("customerKey", "==", customerKey),
     where("isClosed", "==", false),
-    limit(1),
+    limit(10),
   );
 
   const snapshot = await getDocs(q);
 
   if (snapshot.empty) return null;
 
-  const docSnap = snapshot.docs[0];
-  return {
-    id: docSnap.id,
-    ...(docSnap.data() as Omit<ConversationRecord, "id">),
-  } as ConversationRecord;
+  const docs = snapshot.docs.map(mapConversationDoc);
+
+  docs.sort((a, b) => {
+    const aTime = a.updatedAt?.seconds || a.createdAt?.seconds || 0;
+    const bTime = b.updatedAt?.seconds || b.createdAt?.seconds || 0;
+    return bTime - aTime;
+  });
+
+  return docs[0];
 };
 
 export const createConversation = async (
   currentUserProfile?: NullableProfile,
 ) => {
-  const { customerKey, guestSessionId, customerUserId } =
+  const { customerKey, guestSessionId, customerUserId, customerId } =
     getConversationQueryIdentity(currentUserProfile);
 
   const payload = {
     customerKey,
     customerUserId,
+    customerId,
     guestSessionId,
     customerName: currentUserProfile?.name ?? null,
     customerEmail: currentUserProfile?.email ?? null,
     customerPhone: currentUserProfile?.phoneNumber ?? null,
+    customerAvatar: null,
     assignedStaffId: null,
+    staffId: null,
+    staffName: null,
+    participants: customerUserId ? [customerUserId] : [customerKey],
+    unreadCustomer: 0,
+    unreadStaff: 0,
     botEnabled: true,
     botPending: false,
     pendingMessageId: null,
@@ -109,10 +129,52 @@ export const createConversation = async (
     lastSenderId: null,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
+    status: "OPEN",
   };
 
   const ref = await addDoc(collection(db, "conversations"), payload);
   return ref.id;
+};
+
+const mergeConversationMessages = async (
+  sourceConversationId: string,
+  targetConversationId: string,
+) => {
+  if (!sourceConversationId || !targetConversationId) return;
+  if (sourceConversationId === targetConversationId) return;
+
+  const sourceMessagesSnap = await getDocs(
+    query(
+      collection(db, "conversations", sourceConversationId, "messages"),
+      orderBy("createdAt", "asc"),
+    ),
+  );
+
+  if (sourceMessagesSnap.empty) return;
+
+  const batch = writeBatch(db);
+
+  sourceMessagesSnap.docs.forEach((item) => {
+    const targetRef = doc(
+      db,
+      "conversations",
+      targetConversationId,
+      "messages",
+      item.id,
+    );
+
+    batch.set(targetRef, item.data(), { merge: true });
+  });
+
+  await batch.commit();
+};
+
+const closeConversation = async (conversationId: string) => {
+  await updateDoc(doc(db, "conversations", conversationId), {
+    isClosed: true,
+    status: "MERGED",
+    updatedAt: serverTimestamp(),
+  });
 };
 
 export const getOrCreateConversation = async (
@@ -137,38 +199,77 @@ export const claimGuestConversationToUser = async (
     collection(db, "conversations"),
     where("customerKey", "==", userCustomerKey),
     where("isClosed", "==", false),
-    limit(1),
+    limit(10),
   );
 
   const userSnapshot = await getDocs(userQuery);
-  if (!userSnapshot.empty) {
-    return userSnapshot.docs[0].id;
-  }
+  const userDocs = userSnapshot.docs;
 
   const guestQuery = query(
     collection(db, "conversations"),
     where("customerKey", "==", guestSessionId),
     where("isClosed", "==", false),
-    limit(1),
+    limit(10),
   );
 
   const guestSnapshot = await getDocs(guestQuery);
+  const guestDocs = guestSnapshot.docs;
 
-  if (guestSnapshot.empty) {
-    return null;
+  if (userDocs.length > 0) {
+    const mainUserDoc = userDocs[0];
+
+    await updateDoc(doc(db, "conversations", mainUserDoc.id), {
+      customerKey: userCustomerKey,
+      customerUserId: currentUserProfile.id,
+      customerId: currentUserProfile.id,
+      customerName: currentUserProfile.name ?? null,
+      customerEmail: currentUserProfile.email ?? null,
+      customerPhone: currentUserProfile.phoneNumber ?? null,
+      participants: [currentUserProfile.id],
+      updatedAt: serverTimestamp(),
+    });
+
+    for (const guestDoc of guestDocs) {
+      if (guestDoc.id === mainUserDoc.id) continue;
+
+      await mergeConversationMessages(guestDoc.id, mainUserDoc.id);
+      await closeConversation(guestDoc.id);
+    }
+
+    for (let i = 1; i < userDocs.length; i += 1) {
+      const duplicateUserDoc = userDocs[i];
+      await mergeConversationMessages(duplicateUserDoc.id, mainUserDoc.id);
+      await closeConversation(duplicateUserDoc.id);
+    }
+
+    return mainUserDoc.id;
   }
 
-  const guestDoc = guestSnapshot.docs[0];
-  await updateDoc(doc(db, "conversations", guestDoc.id), {
-    customerKey: userCustomerKey,
-    customerUserId: currentUserProfile.id,
-    customerName: currentUserProfile.name ?? null,
-    customerEmail: currentUserProfile.email ?? null,
-    customerPhone: currentUserProfile.phoneNumber ?? null,
-    updatedAt: serverTimestamp(),
-  });
+  if (guestDocs.length > 0) {
+    const mainGuestDoc = guestDocs[0];
 
-  return guestDoc.id;
+    await updateDoc(doc(db, "conversations", mainGuestDoc.id), {
+      customerKey: userCustomerKey,
+      customerUserId: currentUserProfile.id,
+      customerId: currentUserProfile.id,
+      guestSessionId,
+      customerName: currentUserProfile.name ?? null,
+      customerEmail: currentUserProfile.email ?? null,
+      customerPhone: currentUserProfile.phoneNumber ?? null,
+      participants: [currentUserProfile.id],
+      updatedAt: serverTimestamp(),
+    });
+
+    for (let i = 1; i < guestDocs.length; i += 1) {
+      const duplicateGuestDoc = guestDocs[i];
+      await mergeConversationMessages(duplicateGuestDoc.id, mainGuestDoc.id);
+      await closeConversation(duplicateGuestDoc.id);
+    }
+
+    return mainGuestDoc.id;
+  }
+
+  return null;
 };
 
 export const sendTextMessage = async ({
@@ -212,6 +313,7 @@ export const sendTextMessage = async ({
     lastMessage: text,
     lastMessageType: "text",
     lastSenderId: senderId,
+    unreadStaff: 0,
     updatedAt: serverTimestamp(),
   });
 };
@@ -436,4 +538,50 @@ export const subscribeConversation = (
       ...(snapshot.data() as Omit<ConversationRecord, "id">),
     });
   });
+};
+
+export const shouldSkipBotReply = (text: string) => {
+  const normalized = text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!normalized) return true;
+
+  const skipMessages = [
+    "ok",
+    "oke",
+    "oki",
+    "okie",
+    "vang",
+    "da",
+    "uh",
+    "uhm",
+    "um",
+    "a",
+    "e",
+    "roi",
+    "duoc",
+    "cam on",
+    "thanks",
+    "thank you",
+    "bye",
+    "tam biet",
+  ];
+
+  if (skipMessages.includes(normalized)) {
+    return true;
+  }
+
+  const wordCount = normalized.split(" ").filter(Boolean).length;
+
+  if (wordCount <= 1) {
+    return true;
+  }
+
+  return false;
 };

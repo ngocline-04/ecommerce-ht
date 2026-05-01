@@ -9,6 +9,7 @@ import {
   sendBotProductMessage,
   sendBotTextMessage,
   sendTextMessage,
+  shouldSkipBotReply,
   subscribeConversation,
   subscribeConversationMessages,
 } from "./chat.service";
@@ -94,65 +95,75 @@ export const useConversationChat = ({
     };
   }, [conversationId]);
 
-  const sendMessage = useCallback(
-    async (text: string) => {
-      const trimmed = text.trim();
-      if (!trimmed) return;
+const sendMessage = useCallback(
+  async (text: string) => {
+    const trimmed = text.trim();
+    if (!trimmed) return;
 
-      let currentConversationId = conversationId;
+    let currentConversationId = conversationId;
 
-      if (!currentConversationId) {
-        currentConversationId = await ensureConversation();
-        if (!currentConversationId) return;
+    if (!currentConversationId) {
+      currentConversationId = await ensureConversation();
+      if (!currentConversationId) return;
+    }
+
+    const clientMessageId = createClientMessageId();
+
+    setSending(true);
+    try {
+      await sendTextMessage({
+        conversationId: currentConversationId,
+        currentUserProfile,
+        text: trimmed,
+        clientMessageId,
+      });
+    } finally {
+      setSending(false);
+    }
+
+    if (shouldSkipBotReply(trimmed)) {
+      return;
+    }
+
+    if (botLockRef.current) return;
+    botLockRef.current = true;
+
+    try {
+      await waitBotDelay();
+
+      const { replyText, matchedFaqKey, products } =
+        await getBotReply(trimmed);
+
+      if (!replyText.trim() && !products.length) {
+        return;
       }
 
-      const clientMessageId = createClientMessageId();
-
-      setSending(true);
-      try {
-        await sendTextMessage({
-          conversationId: currentConversationId,
-          currentUserProfile,
-          text: trimmed,
-          clientMessageId,
-        });
-      } finally {
-        setSending(false);
-      }
-
-      if (botLockRef.current) return;
-      botLockRef.current = true;
-
-      try {
-        await waitBotDelay();
-
-        const { replyText, matchedFaqKey, products } =
-          await getBotReply(trimmed);
-
+      if (replyText.trim()) {
         await sendBotTextMessage({
           conversationId: currentConversationId,
           text: replyText,
           matchedFaqKey,
         });
-
-        for (const product of products) {
-          await sendBotProductMessage({
-            conversationId: currentConversationId,
-            product,
-          });
-        }
-      } finally {
-        botLockRef.current = false;
       }
-    },
-    [
-      conversationId,
-      currentUserProfile,
-      ensureConversation,
-      getBotReply,
-      waitBotDelay,
-    ],
-  );
+
+      for (const product of products) {
+        await sendBotProductMessage({
+          conversationId: currentConversationId,
+          product,
+        });
+      }
+    } finally {
+      botLockRef.current = false;
+    }
+  },
+  [
+    conversationId,
+    currentUserProfile,
+    ensureConversation,
+    getBotReply,
+    waitBotDelay,
+  ],
+);
 
   return {
     conversationId,
