@@ -87,7 +87,9 @@ const normalizeUserLevel = (level?: string): UserLevel => {
 };
 
 const normalizeCategoryCode = (value?: string) => {
-  return String(value || "").replace(/"/g, "").trim();
+  return String(value || "")
+    .replace(/"/g, "")
+    .trim();
 };
 
 const getCategoryInfo = (
@@ -418,7 +420,10 @@ export default function ProductDetailPage() {
       const [productSnap, promotionSnap, categorySnap, userSnap] =
         await Promise.all([
           getDocs(
-            query(collection(db, "Products"), where("status", "==", "AVAILABLE")),
+            query(
+              collection(db, "Products"),
+              where("status", "==", "AVAILABLE"),
+            ),
           ),
           getDocs(collection(db, "Promotions")),
           getDocs(collection(db, "Category")),
@@ -558,7 +563,8 @@ export default function ProductDetailPage() {
   const requireVariantSelection = variantAttributeKeys.length > 0;
   const canOperate = !requireVariantSelection || matchedVariantIndex >= 0;
 
-  const effectiveVariantIndex = matchedVariantIndex >= 0 ? matchedVariantIndex : 0;
+  const effectiveVariantIndex =
+    matchedVariantIndex >= 0 ? matchedVariantIndex : 0;
 
   const visiblePriceRows = useMemo(() => {
     if (!product) return [];
@@ -586,7 +592,10 @@ export default function ProductDetailPage() {
 
   const averageRating = useMemo(() => {
     if (!reviews.length) return 0;
-    const total = reviews.reduce((sum, item) => sum + Number(item.rating || 0), 0);
+    const total = reviews.reduce(
+      (sum, item) => sum + Number(item.rating || 0),
+      0,
+    );
     return total / reviews.length;
   }, [reviews]);
 
@@ -645,6 +654,7 @@ export default function ProductDetailPage() {
       if (!validateVariantBeforeAction()) return;
 
       const userId = currentUserProfile?.id;
+      console.log(currentUserProfile, "check======");
       if (!userId) {
         toast.error("Không tìm thấy thông tin người dùng");
         return;
@@ -742,7 +752,7 @@ export default function ProductDetailPage() {
   const handleSubmitReview = async (values: any) => {
     requireLoginThen(async () => {
       if (!product) return;
-
+      console.log(currentUserProfile, "check======");
       if (!currentUserProfile?.id) {
         toast.error("Không tìm thấy thông tin người dùng");
         return;
@@ -777,7 +787,10 @@ export default function ProductDetailPage() {
           updatedAt: now,
         };
 
-        const reviewRef = await addDoc(collection(db, "ProductReviews"), payload);
+        const reviewRef = await addDoc(
+          collection(db, "ProductReviews"),
+          payload,
+        );
 
         setReviews((prev) => [
           {
@@ -831,7 +844,11 @@ export default function ProductDetailPage() {
           <Card bordered={false} className="rounded-radius-xl shadow-down-s">
             {allImages.length ? (
               <>
-                <Carousel autoplay dots className="overflow-hidden rounded-radius-l">
+                <Carousel
+                  autoplay
+                  dots
+                  className="overflow-hidden rounded-radius-l"
+                >
                   {allImages.map((image, index) => (
                     <div key={`${image}_${index}`}>
                       <div className="flex h-[520px] items-center justify-center bg-color-100 mobile:h-[320px]">
@@ -887,7 +904,9 @@ export default function ProductDetailPage() {
               ) : null}
 
               {product.status ? (
-                <Tag color={product.status === "AVAILABLE" ? "green" : "default"}>
+                <Tag
+                  color={product.status === "AVAILABLE" ? "green" : "default"}
+                >
                   {STATUS_CONVERT[product.status]}
                 </Tag>
               ) : null}
@@ -965,7 +984,9 @@ export default function ProductDetailPage() {
                       <Button
                         key={`${attributeKey}_${value}`}
                         type={active ? "primary" : "default"}
-                        onClick={() => handleSelectAttribute(attributeKey, value)}
+                        onClick={() =>
+                          handleSelectAttribute(attributeKey, value)
+                        }
                         className="rounded-radius-m"
                       >
                         {value}
@@ -984,7 +1005,9 @@ export default function ProductDetailPage() {
 
             {selectedVariant ? (
               <div className="mb-20 rounded-radius-l border border-color-300 p-16">
-                <div className="mb-8 text-14 text-color-700">Biến thể đã chọn</div>
+                <div className="mb-8 text-14 text-color-700">
+                  Biến thể đã chọn
+                </div>
                 <div className="mb-8 text-15 font-medium text-color-900">
                   {getVariantLabel(selectedVariant as any)}
                 </div>
@@ -995,7 +1018,9 @@ export default function ProductDetailPage() {
             ) : null}
 
             <div className="mb-20">
-              <div className="mb-8 text-15 font-medium text-color-900">Số lượng</div>
+              <div className="mb-8 text-15 font-medium text-color-900">
+                Số lượng
+              </div>
 
               <Space.Compact>
                 <Button
@@ -1060,7 +1085,12 @@ export default function ProductDetailPage() {
               </>
             ) : null}
 
-            <Descriptions bordered column={1} size="middle" labelStyle={{ width: 220 }}>
+            <Descriptions
+              bordered
+              column={1}
+              size="middle"
+              labelStyle={{ width: 220 }}
+            >
               <Descriptions.Item label="Mã sản phẩm">
                 {product.id || "-"}
               </Descriptions.Item>
@@ -1091,11 +1121,13 @@ export default function ProductDetailPage() {
               <Descriptions.Item label="Thuộc tính chung">
                 {(product as any)?.attributes ? (
                   <div className="flex flex-wrap gap-8">
-                    {Object.entries((product as any).attributes).map(([key, value]) => (
-                      <Tag key={key}>
-                        {key}: {String(value)}
-                      </Tag>
-                    ))}
+                    {Object.entries((product as any).attributes).map(
+                      ([key, value]) => (
+                        <Tag key={key}>
+                          {key}: {String(value)}
+                        </Tag>
+                      ),
+                    )}
                   </div>
                 ) : (
                   "-"
@@ -1105,14 +1137,20 @@ export default function ProductDetailPage() {
                 {Array.isArray(product.variants) && product.variants.length ? (
                   <div className="flex flex-col gap-8">
                     {product.variants.map((variant: any, index: number) => {
-                      const rowPrices = getVisiblePriceRows(product, typeUser, index);
+                      const rowPrices = getVisiblePriceRows(
+                        product,
+                        typeUser,
+                        index,
+                      );
 
                       return (
                         <div
                           key={`${product.id}_${index}`}
                           className="rounded-radius-m border border-color-300 p-12"
                         >
-                          <div className="mb-4 font-medium">Biến thể {index + 1}</div>
+                          <div className="mb-4 font-medium">
+                            Biến thể {index + 1}
+                          </div>
                           <div className="mb-4 text-14 text-color-800">
                             {getVariantLabel(variant)}
                           </div>
@@ -1126,7 +1164,9 @@ export default function ProductDetailPage() {
                                 key={`${index}_${row.key}`}
                                 className="flex items-center justify-between text-14"
                               >
-                                <span className="text-color-700">{row.label}</span>
+                                <span className="text-color-700">
+                                  {row.label}
+                                </span>
                                 <span className="font-medium text-color-900">
                                   {formatCurrency(row.value)}
                                 </span>
@@ -1164,7 +1204,9 @@ export default function ProductDetailPage() {
                   <Form.Item
                     name="rating"
                     label="Số sao"
-                    rules={[{ required: true, message: "Vui lòng chọn số sao" }]}
+                    rules={[
+                      { required: true, message: "Vui lòng chọn số sao" },
+                    ]}
                   >
                     <Rate />
                   </Form.Item>
@@ -1174,7 +1216,12 @@ export default function ProductDetailPage() {
                   <Form.Item
                     name="content"
                     label="Nội dung đánh giá"
-                    rules={[{ required: true, message: "Vui lòng nhập nội dung đánh giá" }]}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Vui lòng nhập nội dung đánh giá",
+                      },
+                    ]}
                   >
                     <Input.TextArea
                       rows={4}

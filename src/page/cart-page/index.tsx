@@ -644,6 +644,7 @@ const Component = () => {
         return;
       }
 
+      console.log(currentUserProfile, "check=====");
       if (!currentUserProfile?.id) {
         toast.error("Không tìm thấy thông tin người dùng");
         return;
@@ -740,6 +741,8 @@ const Component = () => {
           ...checkedCartItems.map((item) => removeCartPendingItem(item.cartId)),
         ]);
 
+        let mailFailedMessage = "";
+
         try {
           await sendCodOrderMail({
             orderId: createdOrder.id,
@@ -753,16 +756,18 @@ const Component = () => {
           });
         } catch (mailError) {
           console.error(mailError);
-          toast.warning(
+          mailFailedMessage =
             mailError instanceof Error
-              ? `Đặt hàng COD thành công nhưng gửi email thất bại: ${mailError.message}`
-              : "Đặt hàng COD thành công nhưng gửi email xác nhận thất bại",
-          );
-          await bootstrap();
-          return;
+              ? `Gửi email xác nhận thất bại: ${mailError.message}`
+              : "Gửi email xác nhận thất bại";
         }
 
         toast.success("Đặt hàng COD thành công");
+
+        if (mailFailedMessage) {
+          toast.warning(mailFailedMessage);
+        }
+
         await bootstrap();
         return;
       }
